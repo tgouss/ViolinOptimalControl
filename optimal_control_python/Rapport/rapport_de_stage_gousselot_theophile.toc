@@ -1,0 +1,65 @@
+\babel@toc {english}{}
+\contentsline {part}{R\IeC {\'e}sum\IeC {\'e}}{ii}
+\contentsline {part}{Remerciements}{iii}
+\contentsline {chapter}{Glossaire}{vii}
+\contentsline {part}{I\hspace {1em}Introduction}{1}
+\contentsline {chapter}{\numberline {1}Stage international}{2}
+\contentsline {chapter}{\numberline {2}Laboratoire s2m}{3}
+\contentsline {section}{\numberline {2.1}Histoire}{3}
+\contentsline {section}{\numberline {2.2}Domaine d'expertise}{3}
+\contentsline {section}{\numberline {2.3}Effectif}{4}
+\contentsline {section}{\numberline {2.4}Recherche scientifique}{4}
+\contentsline {chapter}{\numberline {3}Contexte}{5}
+\contentsline {section}{\numberline {3.1}Covid-19}{5}
+\contentsline {section}{\numberline {3.2}T\IeC {\'e}l\IeC {\'e}travail}{5}
+\contentsline {section}{\numberline {3.3}Construction d'\IeC {\'e}quipe}{6}
+\contentsline {part}{II\hspace {1em}BiorbdOptim}{7}
+\contentsline {chapter}{\numberline {4}Outils de mod\IeC {\'e}lisation}{8}
+\contentsline {section}{\numberline {4.1}Commande optimal}{8}
+\contentsline {section}{\numberline {4.2}Biorbd}{10}
+\contentsline {section}{\numberline {4.3}BiorbdViz}{12}
+\contentsline {chapter}{\numberline {5}R\IeC {\'e}alisation}{15}
+\contentsline {section}{\numberline {5.1}N\IeC {\'e}cessit\IeC {\'e} collective}{15}
+\contentsline {section}{\numberline {5.2}Commande optimale num\IeC {\'e}rique}{15}
+\contentsline {subsection}{\numberline {5.2.1}Direct multiple shooting}{15}
+\contentsline {subsection}{\numberline {5.2.2}Exemple d'impl\IeC {\'e}mentation}{16}
+\contentsline {section}{\numberline {5.3}cahier des charges}{20}
+\contentsline {section}{\numberline {5.4}D\IeC {\'e}veloppement collaboratif}{20}
+\contentsline {section}{\numberline {5.5}Logiciel sur mesure}{20}
+\contentsline {section}{\numberline {5.6}Article scientifique}{20}
+\contentsline {chapter}{\numberline {6}D\IeC {\'e}veloppement}{21}
+\contentsline {section}{\numberline {6.1}Transfert de langage}{21}
+\contentsline {section}{\numberline {6.2}Besoin/R\IeC {\'e}alisation1}{21}
+\contentsline {section}{\numberline {6.3}Besoin/R\IeC {\'e}alisation2}{21}
+\contentsline {section}{\numberline {6.4}Besoin/R\IeC {\'e}alisation2}{21}
+\contentsline {section}{\numberline {6.5}Exploitation des r\IeC {\'e}sultats}{21}
+\contentsline {subsection}{\numberline {6.5.1}Affichage graphique des \IeC {\'e}tats et controles}{21}
+\contentsline {subsubsection}{Matplotlib}{21}
+\contentsline {subsubsection}{Int\IeC {\'e}gration}{21}
+\contentsline {subsection}{\numberline {6.5.2}Visualisation sur Biorbd-viz}{21}
+\contentsline {subsection}{\numberline {6.5.3}Sauvegarde}{21}
+\contentsline {subsubsection}{Contexte}{21}
+\contentsline {subsubsection}{R\IeC {\'e}sultat}{21}
+\contentsline {subsubsection}{}{21}
+\contentsline {section}{\numberline {6.6}Exemples}{21}
+\contentsline {section}{\numberline {6.7}Tests}{21}
+\contentsline {part}{III\hspace {1em}Optimisation de la gestuelle du violoniste}{22}
+\contentsline {chapter}{\numberline {7}Mod\IeC {\'e}lisation initiale}{24}
+\contentsline {section}{\numberline {7.1}Violon}{24}
+\contentsline {subsection}{\numberline {7.1.1}Jeu}{24}
+\contentsline {subsection}{\numberline {7.1.2}Mod\IeC {\'e}lisation}{24}
+\contentsline {section}{\numberline {7.2}Muscles}{24}
+\contentsline {subsection}{\numberline {7.2.1}Fonctionnement}{24}
+\contentsline {subsection}{\numberline {7.2.2}Mod\IeC {\'e}lisation}{24}
+\contentsline {chapter}{\numberline {8}\'Ecriture du probl\IeC {\`e}me}{25}
+\contentsline {section}{\numberline {8.1}BiorbdOptim}{25}
+\contentsline {section}{\numberline {8.2}Structure du probl\IeC {\`e}me}{25}
+\contentsline {section}{\numberline {8.3}Ajout1}{25}
+\contentsline {section}{\numberline {8.4}Ajout2}{25}
+\contentsline {section}{\numberline {8.5}Ajout3}{25}
+\contentsline {section}{\numberline {8.6}Ajout4}{25}
+\contentsline {section}{\numberline {8.7}Ajout5}{25}
+\contentsline {chapter}{\numberline {9}R\IeC {\'e}sultats}{26}
+\contentsline {part}{IV\hspace {1em}Conclusion}{27}
+\contentsline {chapter}{\numberline {10}Conclusion}{28}
+\contentsline {chapter}{\numberline {A}Annexes}{30}

@@ -1,0 +1,41 @@
+version 3
+
+// SEGMENT DEFINITION
+
+// Information about base segment
+    // Segment
+    segment base
+	translations x
+	rotations y
+	mass 1
+	com 0 0 -1
+	inertia 
+	1 0 0 
+	0 1 0
+	0 0 1
+
+	mesh 0.005 0.005 0
+	mesh -0.005 0.005 0
+	msh -0.005 -0.005 0
+	mesh 0.005 -0.005 0
+	mesh 0.005 0.005 0
+	mesh 0.005 0.005 -1
+	mesh -0.005 0.005 -1
+	mesh -0.005 0.005 0
+	mesh -0.005 0.005 -1
+	mesh -0.005 -0.005 -1
+	mesh -0.005 -0.005 0
+	mesh -0.005 -0.005 -1
+	mesh 0.005 -0.005 -1
+	mesh 0.005 -0.005 0
+	mesh 0.005 -0.005 -1
+	mesh 0.005 0.005 -1
+
+       
+
+    endsegment
+// Markers
+	marker	origine
+		parent	base
+		position	0 0 -1
+	endmarker

@@ -1,0 +1,94 @@
+\part{Optimisation de la gestuelle du violoniste}
+
+BiorbdOptim a pris 75\% de mon temps mais a rendu le développement du Violon 4 fois plus rapide !
+
+
+% 
+%     \chapter{Violon et mécanique du violoniste}
+%     
+% 
+%     
+% organisation travail
+% problémaqtique
+% thèse benjamin
+% fatigue musculaire
+
+
+    \chapter{Modélisation initiale}
+        \section{Violon}
+            \subsection{Jeu}
+            \subsection{Modélisation}
+            
+% Commande optimale appliquée à notre problème Notre objectif principal
+% est de minimiser la fatigue musculaire sans nuire à la qualité du jeu. Le système
+% dynamique est le corps humain avec un violon et un archet. Il est donc soumis aux
+% forces externes telles que la gravité et mis en mouvement par les forces des muscles.
+% Enfin, le mouvement du système est contraint par le modèle musculo-squelettique
+% (articulations, muscles) et par le placement de l’archet et du violon pour générer
+% le son : l’archet doit être perpendiculaire au violon et rester sur le violon, le violon doit être maintenu entre le cou et la main gauche, l’archet doit frotter les cordes ni
+% trop fort ni trop peu pour produire un son correct (environ 10N entre l’archet et les
+% cordes).
+
+        \section{Muscles}
+            \subsection{Fonctionnement}
+            \subsection{Modélisation}
+Travaux de Benjamin Valentin et Camille.
+    \chapter{\'Ecriture du problème}
+        \section{BiorbdOptim}
+        \section{Structure du problème}
+% \[
+% \underset{u \in \mathbb{R}^m, \tau \in \mathbb{R}^n}{\text{minimize}} 
+% \int_0^{900} \frac{1}{2}\left[\psi(u(t),t)^T\psi(u(t),t) + \dot{x}_2(u(t), t)^T\dot{x}_2(u(t), t) + u(t)^T u(t) + \tau(t)^T \tau(t)\right]dt\\\]
+% 
+% 
+% \text{subject to}
+% \begin{eqnarray*}
+% \dot{x_1}_j(t) = x_{2_j}(t) , \; j=1,\dots,n\\
+% \dot{x_2}_j(t) = \text{FD}(x_{1_j}, x_{2_j}, \sum_{i=1}^n u_i(t) \psi_i(u(t), t)  r_{i,j}\left(x_1(t)\right) f_{mus}\left(F_i^0, l_i(x_1(t)), v_i(x_1(t), x_2(t))\right) + \tau_j) , \; j=1,\dots,n \\
+% \text{bow\_position}(x_1(t)) = \text{Frog}, \; t=0,2,\dots,900 \\
+% \text{bow\_position}(x_1(t)) = \text{Tip}, \; t=1,3,\dots,899 \\
+% x_2(0) = x_{2_0}\\
+% x_{1_{j_\text{min}}} \leq x_{1_j}(t) \leq x_{1_{j_\text{max}}}, \; j=1,\ldots,n \\
+% x_{2_{j_\text{min}}} \leq x_{2_j}(t) \leq x_{2_{j_\text{max}}}, \; j=1,\ldots,n \\
+% 0 \leq u_i(t) \leq 1, \; i=1,\ldots,m \\
+% -10 \leq \tau_j(t) \leq 10, \; j=1,\ldots,n \\
+% a_{\text{violin/neck}_\text{xyz}}(x_1(t), x_2(t), u(t), \tau(t)) = 0 \\
+% -15 \text{ N} \leq F_{\text{bow/violin}_z}(x_1(t), x_2(t), u(t), \tau(t)) \leq -5 \text{ N} \\
+% \left|F_{bow/violin_{y}}(x_1(t), x_2(t), u(t), \tau(t))\right| \leq \mu \left|F_{\text{bow/violin}_z}(x_1(t), x_2(t), u(t), \tau(t))\right| \\
+% \left|\text{bow}_\text{axisX}(x_1(t))^T \text{violin}_\text{normalY}(x_1(t)) \right| \leq 0.05 \\
+% \left|\text{bow}_\text{axisZ}(x_1(t))^T \text{violin}_\text{axixZ}(x_1(t)) \right| \leq 0.05 \\
+% \end{eqnarray*}
+
+% 
+% \dot{x_1}_j(t) = x_{2_j}(t) , \; j=1,\dots,n\\
+% \dot{x_2}_j(t) = \text{FD}(x_{1_j}, x_{2_j}, \sum_{i=1}^n u_i(t) \psi_i(u(t), t)  r_{i,j}\left(x_1(t)\right) f_{mus}\left(F_i^0, l_i(x_1(t)), v_i(x_1(t), x_2(t))\right) + \tau_j) , \; j=1,\dots,n \\
+% \text{bow\_position}(x_1(t)) = \text{Frog}, \; t=0,2,\dots,900 \\
+% \text{bow\_position}(x_1(t)) = \text{Tip}, \; t=1,3,\dots,899 \\
+% x_2(0) = x_{2_0}\\
+% x_{1_{j_\text{min}}} \leq x_{1_j}(t) \leq x_{1_{j_\text{max}}}, \; j=1,\ldots,n \\
+% x_{2_{j_\text{min}}} \leq x_{2_j}(t) \leq x_{2_{j_\text{max}}}, \; j=1,\ldots,n \\
+% 0 \leq u_i(t) \leq 1, \; i=1,\ldots,m \\
+% -10 \leq \tau_j(t) \leq 10, \; j=1,\ldots,n \\
+% a_{\text{violin/neck}_\text{xyz}}(x_1(t), x_2(t), u(t), \tau(t)) = 0 \\
+% -15 \text{ N} \leq F_{\text{bow/violin}_z}(x_1(t), x_2(t), u(t), \tau(t)) \leq -5 \text{ N} \\
+% \left|F_{bow/violin_{y}}(x_1(t), x_2(t), u(t), \tau(t))\right| \leq \mu \left|F_{\text{bow/violin}_z}(x_1(t), x_2(t), u(t), \tau(t))\right| \\
+% \left|\text{bow}_\text{axisX}(x_1(t))^T \text{violin}_\text{normalY}(x_1(t)) \right| \leq 0.05 \\
+% \left|\text{bow}_\text{axisZ}(x_1(t))^T \text{violin}_\text{axixZ}(x_1(t)) \right| \leq 0.05 \\
+        
+
+        \section{Ajout1}
+besoin/choix/explication/conclusion/...
+        \section{Ajout2}
+        \section{Ajout3}
+        \section{Ajout4}
+        
+%mettre custom problem_type-> lien avec section biorbdoptim
+        \section{Ajout5}
+
+    \chapter{Résultats}
+
+
+
+torques résiduels et non-résiduels.
+    
+    

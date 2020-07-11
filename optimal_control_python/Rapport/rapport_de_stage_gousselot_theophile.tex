@@ -1,0 +1,65 @@
+\documentclass[a4paper,11pt, openany]{book}
+\input{package.tex}
+\input{glossary.tex}
+\input{formatting.tex}
+
+
+
+\newcommand\tab[1][1cm]{\hspace*{0.5cm}}
+
+\title{Rapport de stage}
+\author{Théophile \textsc{GOUSSELOT}}
+
+
+
+
+\begin{document}
+\titleformat{\chapter}[display]{\normalfont\bfseries}{}{0pt}{\Huge\thechapter.\ }
+
+\onehalfspacing %interligne de 1.5 (package setspace)
+% \setlength{\parskip}{0.5cm}
+
+
+\renewcommand{\contentsname}{Sommaire}
+\frontmatter
+\input{cover.tex}
+\input{abstract.tex}
+\input{acknowledgements.tex}
+\input{foreword.tex}
+\input{summary.tex}
+\mainmatter
+\input{introduction.tex}
+\input{biorbdoptim.tex}
+\input{violin.tex}
+\input{conclusion.tex}
+
+\cite{blessure_violon}
+
+\appendix
+ \input{annexe.tex}
+
+\backmatter
+
+\bibliographystyle{unsrt} % Le style est mis entre crochets.
+\bibliography{rapport_de_stage_gousselot_theophile} % Mon fichier de base de données s'appelle bibli.bib.
+
+
+Epilogue
+
+\listoffigures
+\listoftables
+
+
+\end{document}
+
+
+%TODO
+% -> ajouter index
+% \cite{ref}
+% \cite{ref2}
+
+%
+% complexité dans les problemes, il ne doit pas y en avoir dans la présentation
+
+%
+% Ce n'est pas parcequ'on à beaucoup de temps qu'on peut le perdre !

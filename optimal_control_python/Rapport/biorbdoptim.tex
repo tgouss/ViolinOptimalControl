@@ -1,0 +1,307 @@
+\part{BiorbdOptim}
+    \chapter[Outils de modélisation]{Outils de modélisation numérique du mouvement}
+    
+    
+Avant de rentrer dans le vif du sujet, il est nécessaire de définir et décrire quelques notions et logiciels sans quoi on ne peut comprendre l'intérêt ou le fonctionnement de \emph{BiorbdOptim}.
+
+Le système d'exploitation \emph{\gls{linux}} a été le premier outil utilisé par la quasi-totalité des contributeurs à BiorbdOptim, il est intéressant de noter que la couche de compatibilité \emph{Windows Subsystem for Linux} a permis à quelques utilisateurs de travailler sur BiorbdOptim depuis le système d'exploitation \emph{windows}. Afin de pouvoir simplifier la gestion des paquets et faciliter le déploiement du logiciel, la distribution libre et open source \gls{anaconda} a été grandement utilisée.
+
+des langages de programmation Python appliqué au développement d'applications dédiées à la science des données et à l'apprentissage automatique (traitement de données à grande échelle, analyse prédictive, calcul scientifique), qui vise à 4
+
+        \section{Commande optimal}
+        
+%expliquer pourquoi on parle de commande optimal
+\label{commande_optimale}
+La commande optimale est une méthode utilisée dans le cas d’un problème de dynamique
+régit par des équations différentielles.
+
+L’objectif est d’amener le système d’un état initial jusqu’à un état final tout en maximiser ou minimiser des indices de performances nommées ``fonctions-objectifs'' et en respectant des contraintes.
+
+L’algorithme de commande optimale a pour but de générer les paramètres d’entrée
+du système afin de passer de l’état initial à l’état final en respectant les contraintes
+et en minimisant la fonction objectif.
+
+L'utilisation du contrôle optimal est particulièrement approprié lorsque les déplacements sont difficilement contrôlables. A titre d'exemple, on l'utilise en biomécanique pour modéliser les mouvements du corps humain. La notion \emph{difficilement contrôlables} réside ici dans l'impossibilité pour le système nerveux à contrôler la position finale d'un membre, son contrôle se limite à émettre un signal au muscle par le système nerveux. Le mouvement du membre est alors régit par des contraintes tels que le fonctionnement du muscle ou la gravité. 
+
+Le principe consiste à agir sur les commandes (variables d’entrées) qui à partir des équations du système donnent les états différentiels du système dynamique. On vérifie ensuite si les contraintes sont respectées
+et si la valeur de la fonction objectif est plus petite qu’une limite pré-établie. Si c’est le cas, la valeur constitue la solution optimale, sinon on modifie les commandes pour recommencer le processus.
+
+Il est possible de schématiser le fonctionnement de la commande optimale comme suit :
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=4cm]{images/control_optimal.png}
+\caption{Principe de fonctionnement de la commande optimal.}
+\end{center}
+\end{figure}
+
+La difficulté de la commande optimale réside dans la détermination de l’influence des modifications en entrée sur la fonction objectif tout en respecter les contraintes.
+Un problème de commande optimale possède nécessairement trois composantes :
+\begin{itemize}
+\setlength\itemsep{-0.5em}
+\item une fonction objectif à minimiser.
+\item un ensemble de contraintes à respecter.
+\item un système dynamique.
+\end{itemize}
+
+
+Mathématiquement, on peut le définir de manière simplifiée comme suit :
+
+\begin{description}
+\setlength\itemsep{-0.5em}
+\item[Fonction objectif :] \[min\ J(t_{F} , x(t_{F})) + \int_{t_{0}}^{t_{F}} { \phi (t, x(t), u(t), p)dt} \]
+\item[Contraintes dynamique :] \[\dot{x}(t_{F}) = f (t_{F} , x(t_{F}), u(t)) \]
+\item[Contraintes de bornes :] \[x_{min} \leq x(t) \leq x_{max} \]  \[u_{min} \leq u(t) \leq u_{max} \] \[x(t_{0}) = x_{0}\] \[x(t_{F}) = x_{F}\]
+\end{description}
+
+avec :
+\begin{description}
+\setlength\itemsep{-0.5em}
+\item[t$_{\text{0}}$ :] l’instant initial.
+\item[t$_{\text{F}}$ :] l’instant final.
+\item[p :] les paramètres à optimiser lors de la résolution.
+\item[u :] le vecteur des commandes.
+\item[x :] le vecteur des états différentiels.
+\item[u$_{\text{min}}$, u$_{\text{max}}$ :] les contraintes de bornes des commandes.
+\item[x$_{\text{min}}$, x$_{\text{max}}$ :] les contraintes de bornes des états différentiels.
+\item[x$_{\text{0}}$, x$_{\text{F}}$ :] états initiaux et finales.
+\end{description}
+
+
+Le premier terme de la fonction objectif est un \emph{terme de Mayer}, il traduit un objectif final, mesuré à $t_{F}$, tandis que l’intégrale, dit \emph{terme de Lagrange}, traduit un objectif sur l’ensemble du mouvement mesuré \emph{à chaque instant} entre $t_{0}$ et $t_{F}$.
+
+L’équation différentielle qui décrit la dynamique du modèle permet de calculer l’état suivant à partir de l’état précédent et des commandes.
+
+Les contraintes de bornes c’est-à-dire les limites des variables d’états et des commandes permettent de définir le cadre du problème. Elles peuvent réduire le champ de recherche de l’optimiseur mais peuvent également rendre le problème numériquement impossible à résoudre.
+
+L'optimiseur est le logiciel chargé d'agir donc sur les commandes pour aboutir à une solution. Les
+commandes peuvent être diverses, on peut citer non-exhaustivement : accélérations, moments articulaires, activations musculaires, excitations neuronales.
+        
+        \section{Biorbd}
+        
+        
+La librairie Biorbd, codée au sein du laboratoire s2m en très grande partie par M. Benjamin \textsc{Michaud}. possède un grand nombre d’outils de dynamique et de modélisation. Le nom de cette librairie provient de l'association de :
+
+\begin{description}
+\setlength\itemsep{-0.5em}
+\item[bio :] pour biomécanique, domaine d’étude du laboratoire
+\item[rbd :] l’essentiel de la librairie s’appuie sur la bibliothèque de fonction de calculs mécaniques
+des corps rigides RBDL (Rigid Body Dynamics Library).
+\end{description}
+
+La librairie gére la création et l'accès à un modèle biomécanique stocké sous le forme d'un fichier ayant un extension \emph{.bioMod}. Les caractéristiques du modèles y sont définies avec une syntaxe précise. Une image valant mille mots, l'exemple ci-dessous décrit un cube dans l'espace nommé ayant :
+
+\begin{itemize}
+\item un \emph{segment : ``Ground''} immobile faisant office de repère global, , il se caractérise par :
+    \begin{itemize}
+    \vspace{-0.5em}
+    \setlength\itemsep{-0.2em}
+    \item un \emph{marqueur : ``m1''} fixés sur le segment Ground aux coordonnées $(1, 0, 0)$.
+    \item un \emph{marqueur : ``m2''} fixés sur le segment Ground aux coordonnées $(2, 0, 0)$.
+    \end{itemize}
+\item un \emph{segment : ``Seg1''} représentant le cube, il se caractérise par :
+    \begin{itemize}
+    \vspace{-0.5em}
+    \setlength\itemsep{-0.2em}
+    \item une \emph{translation le long de l'axe x} définie dans l'intervalle $[-0.7, 2.3]$.
+    \item une \emph{translation le long de l'axe z} définie dans l'intervalle $[-1, 1]$.
+    \item une \emph{rotation autour de l'axe y} définie dans l'intervalle $[-0.7, 2.3]$.
+    \item une \emph{masse} de 1 kg.
+    \item une \emph{matrice d'inertie} caractérisant la répartition de la masse dans le volume, moment d’inertie identique selon les 3 axes.
+    \item un \emph{centre de masse} aux coordonnées $(0, 0, 0)$.
+    \item un \emph{ensemble de mesh} : segments représentant les arêtes du cube.
+    \end{itemize}
+\end{itemize}
+
+\newpage
+
+\lstinputlisting{code/cube.bioMod}
+\vspace{-0.6cm}
+\begin{figure}[h]
+\caption{Modèle cube.bioMod}
+\end{figure}
+
+En première approximation, un segment peut être assimilable à un membre du corps humain, et un marqueur à un point fixe dans le repère du segment. Un segment peut être défini dans le repère global ou à partir d'un segment existant, par exemple un avant-bras peut être défini à partir du bout du bras. La librairie propose une grande quantité d'éléments biomécaniques, on peut citer non-exhaustivement :
+\begin{itemize}
+\setlength\itemsep{-0.5em}
+\item des segments.
+\item des marqueurs.
+\item des muscles.
+\item des forces de contact.
+\item des forces externes.
+\end{itemize}
+
+Biobrd comprend également une importante quantité de fonctions mécaniques calculatoires. La librairie repose, entre autre,
+sur \emph{\gls{casadi}} \footnotemark[3] : un outil open-source pour l'optimisation non linéaire et la différenciation algorithmique. La différenciation algorithmique de casadi permet un gain considérable lors de la dérivation des équations différentielles.
+
+
+Téléchargeable en libre accès sur GitHub\footnotemark[1] la librairie Biorbd se développe encore au sein du laboratoire, qui essaie de démocratiser son utilisation.
+
+\footnotetext[1]{https://github.com/pyomeca/biorbd}
+\footnotetext[3]{https://web.casadi.org/}
+
+
+        
+        \section{BiorbdViz}
+
+Biorbd possède également une interface de programmation écrite en Python : \emph{biorbd-viz}. Elle permet à partir d'un fichier \emph{.bioMod} de :
+
+\begin{itemize}
+\setlength\itemsep{-0.5em}
+\item visualiser en trois dimensions le modèle.
+\item visualiser un mouvement en trois dimensions du modèle à partir d'un tableau de position \emph{\gls{numpy}}
+\end{itemize}
+
+Pour chaque degré de liberté, biorbd-viz dispose de curseurs indiquant la valeur actuelle par rapport à l'intervalle autorisé.
+A titre d'illustration, le cube initialement à 0 sur chacun de ses degré de liberté a subit d'abord une rotation autour de l'axe de 0.74 radians puis une translation de -0.52 mètres selon l'axe z.
+
+\`A l'instar de biorbd, biorbd-viz peut être téléchargé sur GitHub\footnotemark[2].
+
+
+\footnotetext[2]{https://github.com/pyomeca/biorbd-viz}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=15cm, keepaspectratio]{images/biorbdviz1.png}
+\rule{\linewidth}{0mm}
+\includegraphics[width=15cm, keepaspectratio]{images/biorbdviz2.png}
+\rule{\linewidth}{0mm}
+\includegraphics[width=15cm, keepaspectratio]{images/biorbdviz3.png}
+\caption{Représentation sous biorbd-viz du modèle cube.bioMod.}
+\end{center}
+\end{figure}
+
+        
+    \chapter{Réalisation}
+
+        \section{Nécessité collective}
+        
+Comme présenté précédemment (section~\ref{equipe_control_optimal} p.~\pageref{equipe_control_optimal}), l'équipe de Commande optimale regroupe une dizaine de personne. L'épidémie du Covid-19 a contraint d'autres chercheurs, privés d'expérience à mener, à rejoindre le groupe.
+
+Chacun travaille sur une problématique biomécanique, et fait appel à la commande optimale pour la résoudre. Rapidement,  un constat a émané du groupe : pour appliquer du contrôle optimal, chaque chercheur programme majoritairement les mêmes instructions que ses collègues.
+Benjamin \textsc{Michaud} a alors suggéré d'écrire une base commune permettant de mutualiser l'écriture des problèmes. Benjamin \textsc{Michaud}, mon homologue Paul \textsc{Wegiel} et moi avons entamé la programmation de cette base au commencement de nos stages.
+        
+        
+        \section{Commande optimale numérique}
+        
+        
+    
+La solution d’un problème de commande optimale est une équation générale, obtenue comme définie précédemment (section~\ref{commande_optimale} p.~\pageref{commande_optimale}), à partir d'une fonction objectif, d'un ensemble de contraintes et d'un système dynamique. En pratique, la plupart des problèmes sont trop complexes pour trouver la solution exacte, on procède donc à une résolution numérique.
+
+            \subsection{Direct multiple shooting}
+
+Pour cela, il existe plusieurs approches, au laboratoire, le direct multiple shooting est la plus utilisée. Il consiste à diviser la durée du problème en intervalles, puis à calculer les états en chaque point, appelé nœud. Entre ces nœuds, les commandes sont déterminées, on calcule donc l’état au prochain nœud à partir de l’état précédent et des commandes sur l’intervalle.
+Les commandes sont définies constantes sur l’intervalle afin de simplifier le problème, cependant, elles pourraient suivre une fonction définie.
+
+Mathématiquement, on doit définir de surcroît :
+
+\begin{description}
+\setlength\itemsep{-0.5em}
+\item[Subdivision du temps :] \[t_{0} < t_{1} < ... < t_{N} \text{\tab avec \tab } \forall i \in [0, N] \text{  :  } t_{i} = t_{0} + i \cdot \frac{t_{F}-t_{0}}{N} \]
+\end{description}
+
+Les états initiaux sont les points noirs, les commandes sont en pointillés. L'intégration des états initiaux via les commandes permettent d'obtenir les points blancs ainsi que le chemin pour s'y rendre.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=12cm, keepaspectratio]{images/dms.png}
+\caption{Illustration of direct multiple shooting. Ren Z. Skjetne R. Gao Z. \cite{dms}}
+\end{center}
+\end{figure}
+ICCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCI PARLER DE LA CONTINUITE CONTRAINE %TODO
+
+Il est pertinent de remarquer que le nombre de nœuds influe considérablement sur la convergence du problème : s'il est faible la solution sera approximative, à l'inverse s'il est élevé, l'exécution se verra prolongée.
+
+Le travail de résolution, c'est-à-dire déterminer une solution : les commandes et les états est accompli par un logiciel appelé solveur, nous évoquerons deux d'entre eux : \emph{\gls{ipopt}} et \emph{\gls{acados}}.
+
+Le chercheur souhaitant appliqué un algortihme de commande optimale, doit sélectionner un solveur, puis l’exécuter en lui procurrant les paramètres nécessaires à la bonne définiton du problème.
+        
+            \subsection{Exemple d'implémentation}
+
+Afin de me familiariser aux outils de commande optimale, ma première mission a été d'implémenter un problème simple de problème de commande optimale. On considère un pendule ayant un degré de rotation autour d'un axe y, et une translation selon un axe x. Le problème consiste à amener le pendule d'une position verticale vers le bas, à une position verticale vers le haut avec une commande nulle selon la rotation.
+
+L'implémentation du problème nécessite la création d'un fichier .bioMod décrivant le pendule disponible en annexe 
+(section~\ref{code_pendule_bioMod} p.~\pageref{code_pendule_bioMod}), et d'un fichier appelant le solveur et décrivant le problème (section~\ref{code_pendule_python} p.~\pageref{code_pendule_python}).
+
+Il n'est pas nécessaire d’éplucher toutes les lignes de code, il suffit de retenir qu'il est nécessaire de définir le problème comme présenté précédemment (section~\ref{commande_optimale} p.~\pageref{commande_optimale}).  On accède aux caractéristiques du modèle .bioMod, via les fonctions \emph{model. ...}.
+L'utilisation du solveur ipopt impose une syntaxe, on utilise le module \emph{opti} afin de spécifier :
+\begin{description}
+\setlength\itemsep{-0.2em}
+\item [les degrés de liberté et le nombre de noeuds :] 2 degrés avec 31 noeuds - \emph{lignes 27-28}.
+\item [le système dynamique :] écrite avec le module casadi - \emph{lignes 31-64}.
+\item [les fonction objectif :] minimiser les commandes - \emph{lignes 70-75}.
+\item [les contraintes :] de continuité, de bornes, des états initiaux et finales - \emph{ligne 67 / lignes 77-93}.
+\item [l'appel au solveur :] \emph{ligne 97}.
+\end{description}
+
+La suite du fichier permet, à partir de la solution renvoyé par le solveur, d'afficher avec le module matplotlib les valeurs des états et commandes en fonction du temps. Enfin, l'appel à biorbd-viz, l'interface trois dimension de biorbd, avec chargement des positions permet de visualiser le mouvement. 
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=\textwidth, keepaspectratio]{images/pendule_graphe.png}
+\caption{\'Evolution des états et commandes en fonction du temps.}
+\end{center}
+\end{figure}
+\newcommand\w{8cm}
+
+\newpage
+
+\begin{figure}[H]
+\begin{center}
+\begin{tabular}{cc}
+
+\includegraphics[width=\w, keepaspectratio]{images/pendule1.png} & \includegraphics[width=\w, keepaspectratio]{images/pendule2.png} \\
+\includegraphics[width=\w, keepaspectratio]{images/pendule3.png} & \includegraphics[width=\w, keepaspectratio]{images/pendule4.png} \\
+\includegraphics[width=\w, keepaspectratio]{images/pendule5.png} & \includegraphics[width=\w, keepaspectratio]{images/pendule6.png} \\
+\includegraphics[width=\w, keepaspectratio]{images/pendule7.png} & \includegraphics[width=\w, keepaspectratio]{images/pendule8.png} \\
+\includegraphics[width=\w, keepaspectratio]{images/pendule9.png} & \includegraphics[width=\w, keepaspectratio]{images/pendule10.png} \\
+\includegraphics[width=\w, keepaspectratio]{images/pendule11.png} & \includegraphics[width=\w, keepaspectratio]{images/pendule12.png} \\
+\end{tabular}
+\end{center}
+\end{figure}
+
+
+
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=16cm, keepaspectratio]{images/pendule13.png}
+\caption{Mouvement sous biorbd-viz du modèle pendule.bioMod.}
+\end{center}
+\end{figure}
+blablabla
+\newpage
+
+        \section{cahier des charges} %évolutif
+
+
+        \section{Développement collaboratif}
+github + gitkraken + trello
+choix de python
+        \section{Logiciel sur mesure}
+lien <-> Violon
+        \section{Article scientifique}
+    \chapter{Développement}
+        \section{Transfert de langage}
+        \section{Besoin/Réalisation1}
+Mettre en avant les choix réalisés
+        \section{Besoin/Réalisation2}
+%mettre custom problem_type-> lien avec section VIOlon
+        \section{Besoin/Réalisation2}
+single shooting, comparar test manuellement sur meld-> écrire le test, il faudra l'écrire dans tous les cas
+        \section{Exploitation des résultats}
+            \subsection{Affichage graphique des états et controles}
+                \subsubsection{Matplotlib}
+                \gls{mhe}
+                \subsubsection{Intégration}
+            \subsection{Visualisation sur Biorbd-viz}
+            \subsection{Sauvegarde}
+                \subsubsection{Contexte}
+                \subsubsection{Résultat}
+                \subsubsection{}
+        
+        \section{Exemples}
+        \section{Tests}
+%refactoring
+%nécessité de simplicité, environnemnt miniconda à recreer (mieux vaut repartir d'une base saine) -> luciditer
+    
