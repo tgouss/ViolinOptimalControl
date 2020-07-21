@@ -1,22 +1,48 @@
 \babel@toc {english}{}
-\contentsline {figure}{\numberline {1}{\ignorespaces Un violon muni d'une mentonni\IeC {\`e}re .}}{iv}
+\contentsline {figure}{\numberline {1}{\ignorespaces Un violon muni d'une mentonni\IeC {\`e}re .}}{iv}{figure.0.1}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Organigramme du laboratoire}}{4}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Organigramme du laboratoire au 21/07/20. On d\IeC {\'e}nombre en moyenne 8 nouveaux stagiaires par trimestre.}}{4}{figure.2.1}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Principe de fonctionnement de la commande optimal.}}{9}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Mod\IeC {\`e}le cube.bioMod}}{12}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Repr\IeC {\'e}sentation sous biorbd-viz du mod\IeC {\`e}le cube.bioMod.}}{14}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Principe de fonctionnement de la commande optimal.}}{10}{figure.4.1}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Mod\IeC {\`e}le cube.bioMod}}{13}{figure.4.2}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Repr\IeC {\'e}sentation sous \gls {biorbdviz} du mod\IeC {\`e}le cube.bioMod.}}{15}{figure.4.3}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Illustration of direct multiple shooting. Ren Z. Skjetne R. Gao Z. \cite {dms}}}{16}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces \'Evolution des \IeC {\'e}tats et commandes en fonction du temps.}}{17}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Mouvement sous biorbd-viz du mod\IeC {\`e}le pendule.bioMod.}}{19}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Illustration de l'approche direct multiple shooting. Ren Z. Skjetne R. Gao Z. \cite {dms}}}{17}{figure.5.1}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces \'Evolution des \IeC {\'e}tats et commandes en fonction du temps.}}{19}{figure.5.2}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Mouvement sous \gls {biorbdviz} du mod\IeC {\`e}le pendule.bioMod.}}{21}{figure.5.3}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Capture d'\IeC {\'e}cran du logiciel gitkraken, on y voit plusieurs branches qui fusionnent. Chaque ligne correspond \IeC {\`a} un \emph {commit} ou un \emph {merge} d'une des branches.}}{22}{figure.5.4}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Capture d'\IeC {\'e}cran de l'interface web de github, section issues. Chaque issue est d\IeC {\'e}crite et \IeC {\'e}tiquet\IeC {\'e}e afin de renseigner sur sa criticit\IeC {\'e}, son importance et sa nature.}}{22}{figure.5.5}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Capture d'\IeC {\'e}cran de l'interface web de github, y sont r\IeC {\'e}pertori\IeC {\'e}s les dossiers et fichiers composant le logiciel.}}{24}{figure.6.1}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Structure initiale du logiciel \gls {biorbdoptim}}}{25}{figure.6.2}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Fichier \emph {dynamics.py} avec une seule dynamique propos\IeC {\'e}e.}}{26}{figure.6.3}
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Fichier \emph {objective\_function.py} avec une seule fonction objectif propos\IeC {\'e}e.}}{27}{figure.6.4}
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Extrait du fichier \emph {constraints.py} avec une seule contrainte propos\IeC {\'e}e en compl\IeC {\'e}ment de la contrainte de continuit\IeC {\'e}.}}{28}{figure.6.5}
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Organisation du vecteur V. Avec nx le nombre d'\IeC {\'e}tats, nu le nombre de commandes, et ns le nombre de n\IeC {\oe }uds}}{29}{figure.6.6}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {7.1}{\ignorespaces R\IeC {\'e}partition de l'\IeC {\'e}criture du code de \gls {biorbdoptim} parmi les quatre contributeurs les plus importants \IeC {\`a} date du 16/07/2020.}}{32}{figure.7.1}
+\contentsline {figure}{\numberline {7.2}{\ignorespaces Extrait du fichier \emph {dynamics.py} incluant l'activation musculaire comme commande.}}{33}{figure.7.2}
+\contentsline {figure}{\numberline {7.3}{\ignorespaces Extrait de la fonction \emph {\_\_add\_to\_nlp} du fichier \emph {\_\_init.py\_\_.py}. La fonction v\IeC {\'e}rifie que le param\IeC {\`e}tre donn\IeC {\'e} est en ad\IeC {\'e}quation avec le nombre de phase, dans le cas \IeC {\'e}ch\IeC {\'e}ant, elle ajoute \IeC {\`a} chaque phase --- \IeC {\'e}l\IeC {\'e}ment de nlp le param\IeC {\`e}tre.}}{34}{figure.7.3}
+\contentsline {figure}{\numberline {7.4}{\ignorespaces Extrait du fichier \emph {eocar.py} version \IeC {\`a} \emph {deux phases}. Tous les param\IeC {\`e}tres sont d\IeC {\'e}clar\IeC {\'e}s au sein de listes de deux \IeC {\'e}l\IeC {\'e}ments, un par phase.}}{35}{figure.7.4}
+\contentsline {figure}{\numberline {7.5}{\ignorespaces Structure retourn\IeC {\'e}e par l'appel \IeC {\`a} la fonction \emph {Data.get\_data} du fichier \emph {data.py}}}{36}{figure.7.5}
+\contentsline {figure}{\numberline {7.6}{\ignorespaces Affichage d'une commande. La commande est une fonction d'escalier.}}{37}{figure.7.6}
+\contentsline {figure}{\numberline {7.7}{\ignorespaces Affichage d'une vitesse. Elle pr\IeC {\'e}sente clairement des discontinuit\IeC {\'e}s \IeC {\`a} certains n\IeC {\oe }uds.}}{37}{figure.7.7}
+\contentsline {figure}{\numberline {7.8}{\ignorespaces Extrait de la fonction \emph {Data.get\_data} du fichier \emph {data.py}.}}{38}{figure.7.8}
+\contentsline {figure}{\numberline {7.9}{\ignorespaces Enregistrement d'un fichier ``.bo'' issue de l'exemple \emph {pendulum.py}.}}{39}{figure.7.9}
+\contentsline {figure}{\numberline {7.10}{\ignorespaces Appel \IeC {\`a} la fonction \emph {solve} qui lance l'ex\IeC {\'e}cution du solveur. Les options \emph {show\_on\_optim} et \emph {returns\_iterations} permettent respectivement d'afficher les graphiques avec \gls {matplotlib} mis \IeC {\`a} jour \IeC {\`a} chaque it\IeC {\'e}rations et de retourner toutes les valeurs du vecteur V pour toutes les it\IeC {\'e}rations. ces valeurs sont transmises \IeC {\`a} \emph {sol\_iterations} tandis que \emph {sol} contient en premi\IeC {\`e}re approximation le vecteur V final.}}{40}{figure.7.10}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {A.1}{\ignorespaces Mod\IeC {\`e}le pendule.bioMod}}{31}
-\contentsline {figure}{\numberline {A.2}{\ignorespaces Programmation du probl\IeC {\`e}me du pendule}}{35}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {A.1}{\ignorespaces Utilisation de la fonction d'affichage des variables avec mise \IeC {\`a} jour \IeC {\`a} chaque it\IeC {\'e}rations.}}{52}{figure.A.1}
+\contentsline {figure}{\numberline {A.2}{\ignorespaces Mod\IeC {\`e}le pendule.bioMod.}}{54}{figure.A.2}
+\contentsline {figure}{\numberline {A.3}{\ignorespaces Programmation du probl\IeC {\`e}me du pendule.}}{57}{figure.A.3}
+\contentsline {figure}{\numberline {A.4}{\ignorespaces D\IeC {\'e}finition du probl\IeC {\`e}me eocar.}}{60}{figure.A.4}
+\contentsline {figure}{\numberline {A.5}{\ignorespaces Fichier \emph {biorbd\_optim/\_\_init\_\_.py}}}{67}{figure.A.5}
+\contentsline {figure}{\numberline {A.6}{\ignorespaces Premi\IeC {\`e}re pr\IeC {\'e}sentation \IeC {\`a} l'attention des membres de l'\IeC {\'e}quipe de commande optimale.}}{70}{figure.A.6}
+\contentsline {figure}{\numberline {A.7}{\ignorespaces Deuxi\IeC {\`e}me pr\IeC {\'e}sentation \IeC {\`a} l'attention des membres du laboratoire S2M.}}{73}{figure.A.7}

@@ -1,65 +1,71 @@
 \babel@toc {english}{}
-\contentsline {part}{R\IeC {\'e}sum\IeC {\'e}}{ii}
-\contentsline {part}{Remerciements}{iii}
-\contentsline {chapter}{Glossaire}{vii}
-\contentsline {part}{I\hspace {1em}Introduction}{1}
-\contentsline {chapter}{\numberline {1}Stage international}{2}
-\contentsline {chapter}{\numberline {2}Laboratoire s2m}{3}
-\contentsline {section}{\numberline {2.1}Histoire}{3}
-\contentsline {section}{\numberline {2.2}Domaine d'expertise}{3}
-\contentsline {section}{\numberline {2.3}Effectif}{4}
-\contentsline {section}{\numberline {2.4}Recherche scientifique}{4}
-\contentsline {chapter}{\numberline {3}Contexte}{5}
-\contentsline {section}{\numberline {3.1}Covid-19}{5}
-\contentsline {section}{\numberline {3.2}T\IeC {\'e}l\IeC {\'e}travail}{5}
-\contentsline {section}{\numberline {3.3}Construction d'\IeC {\'e}quipe}{6}
-\contentsline {part}{II\hspace {1em}BiorbdOptim}{7}
-\contentsline {chapter}{\numberline {4}Outils de mod\IeC {\'e}lisation}{8}
-\contentsline {section}{\numberline {4.1}Commande optimal}{8}
-\contentsline {section}{\numberline {4.2}Biorbd}{10}
-\contentsline {section}{\numberline {4.3}BiorbdViz}{12}
-\contentsline {chapter}{\numberline {5}R\IeC {\'e}alisation}{15}
-\contentsline {section}{\numberline {5.1}N\IeC {\'e}cessit\IeC {\'e} collective}{15}
-\contentsline {section}{\numberline {5.2}Commande optimale num\IeC {\'e}rique}{15}
-\contentsline {subsection}{\numberline {5.2.1}Direct multiple shooting}{15}
-\contentsline {subsection}{\numberline {5.2.2}Exemple d'impl\IeC {\'e}mentation}{16}
-\contentsline {section}{\numberline {5.3}cahier des charges}{20}
-\contentsline {section}{\numberline {5.4}D\IeC {\'e}veloppement collaboratif}{20}
-\contentsline {section}{\numberline {5.5}Logiciel sur mesure}{20}
-\contentsline {section}{\numberline {5.6}Article scientifique}{20}
-\contentsline {chapter}{\numberline {6}D\IeC {\'e}veloppement}{21}
-\contentsline {section}{\numberline {6.1}Transfert de langage}{21}
-\contentsline {section}{\numberline {6.2}Besoin/R\IeC {\'e}alisation1}{21}
-\contentsline {section}{\numberline {6.3}Besoin/R\IeC {\'e}alisation2}{21}
-\contentsline {section}{\numberline {6.4}Besoin/R\IeC {\'e}alisation2}{21}
-\contentsline {section}{\numberline {6.5}Exploitation des r\IeC {\'e}sultats}{21}
-\contentsline {subsection}{\numberline {6.5.1}Affichage graphique des \IeC {\'e}tats et controles}{21}
-\contentsline {subsubsection}{Matplotlib}{21}
-\contentsline {subsubsection}{Int\IeC {\'e}gration}{21}
-\contentsline {subsection}{\numberline {6.5.2}Visualisation sur Biorbd-viz}{21}
-\contentsline {subsection}{\numberline {6.5.3}Sauvegarde}{21}
-\contentsline {subsubsection}{Contexte}{21}
-\contentsline {subsubsection}{R\IeC {\'e}sultat}{21}
-\contentsline {subsubsection}{}{21}
-\contentsline {section}{\numberline {6.6}Exemples}{21}
-\contentsline {section}{\numberline {6.7}Tests}{21}
-\contentsline {part}{III\hspace {1em}Optimisation de la gestuelle du violoniste}{22}
-\contentsline {chapter}{\numberline {7}Mod\IeC {\'e}lisation initiale}{24}
-\contentsline {section}{\numberline {7.1}Violon}{24}
-\contentsline {subsection}{\numberline {7.1.1}Jeu}{24}
-\contentsline {subsection}{\numberline {7.1.2}Mod\IeC {\'e}lisation}{24}
-\contentsline {section}{\numberline {7.2}Muscles}{24}
-\contentsline {subsection}{\numberline {7.2.1}Fonctionnement}{24}
-\contentsline {subsection}{\numberline {7.2.2}Mod\IeC {\'e}lisation}{24}
-\contentsline {chapter}{\numberline {8}\'Ecriture du probl\IeC {\`e}me}{25}
-\contentsline {section}{\numberline {8.1}BiorbdOptim}{25}
-\contentsline {section}{\numberline {8.2}Structure du probl\IeC {\`e}me}{25}
-\contentsline {section}{\numberline {8.3}Ajout1}{25}
-\contentsline {section}{\numberline {8.4}Ajout2}{25}
-\contentsline {section}{\numberline {8.5}Ajout3}{25}
-\contentsline {section}{\numberline {8.6}Ajout4}{25}
-\contentsline {section}{\numberline {8.7}Ajout5}{25}
-\contentsline {chapter}{\numberline {9}R\IeC {\'e}sultats}{26}
-\contentsline {part}{IV\hspace {1em}Conclusion}{27}
-\contentsline {chapter}{\numberline {10}Conclusion}{28}
-\contentsline {chapter}{\numberline {A}Annexes}{30}
+\contentsline {part}{R\IeC {\'e}sum\IeC {\'e}}{ii}{Doc-Start}
+\contentsline {part}{Remerciements}{iii}{Doc-Start}
+\contentsline {chapter}{Glossaire}{vii}{section*.2}
+\contentsline {part}{I\hspace {1em}Introduction}{1}{part.1}
+\contentsline {chapter}{\numberline {1}Stage international}{2}{chapter.1}
+\contentsline {chapter}{\numberline {2}Laboratoire S2M}{3}{chapter.2}
+\contentsline {section}{\numberline {2.1}Histoire}{3}{section.2.1}
+\contentsline {section}{\numberline {2.2}Domaine d'expertise}{3}{section.2.2}
+\contentsline {section}{\numberline {2.3}Effectif}{4}{section.2.3}
+\contentsline {section}{\numberline {2.4}Recherche scientifique}{4}{section.2.4}
+\contentsline {chapter}{\numberline {3}Contexte}{6}{chapter.3}
+\contentsline {section}{\numberline {3.1}Covid-19}{6}{section.3.1}
+\contentsline {section}{\numberline {3.2}T\IeC {\'e}l\IeC {\'e}travail}{6}{section.3.2}
+\contentsline {section}{\numberline {3.3}Construction d'\IeC {\'e}quipe}{7}{section.3.3}
+\contentsline {part}{II\hspace {1em}BiorbdOptim}{8}{part.2}
+\contentsline {chapter}{\numberline {4}Outils de mod\IeC {\'e}lisation}{9}{chapter.4}
+\contentsline {section}{\numberline {4.1}Commande optimal}{9}{section.4.1}
+\contentsline {section}{\numberline {4.2}Biorbd}{11}{section.4.2}
+\contentsline {section}{\numberline {4.3}BiorbdViz}{13}{section.4.3}
+\contentsline {chapter}{\numberline {5}R\IeC {\'e}alisation}{16}{chapter.5}
+\contentsline {section}{\numberline {5.1}N\IeC {\'e}cessit\IeC {\'e} collective}{16}{section.5.1}
+\contentsline {section}{\numberline {5.2}Commande optimale num\IeC {\'e}rique}{16}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Direct multiple shooting}{16}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}Exemple d'impl\IeC {\'e}mentation}{17}{subsection.5.2.2}
+\contentsline {section}{\numberline {5.3}D\IeC {\'e}veloppement collaboratif}{21}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Communication}{21}{subsection.5.3.1}
+\contentsline {subsection}{\numberline {5.3.2}Logiciel sur mesure}{23}{subsection.5.3.2}
+\contentsline {subsection}{\numberline {5.3.3}Article scientifique}{23}{subsection.5.3.3}
+\contentsline {chapter}{\numberline {6}D\IeC {\'e}veloppement initial}{24}{chapter.6}
+\contentsline {section}{\numberline {6.1}Structure}{24}{section.6.1}
+\contentsline {section}{\numberline {6.2}Mutualisation du code}{25}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}D\IeC {\'e}finition du probl\IeC {\`e}me}{25}{subsection.6.2.1}
+\contentsline {subsection}{\numberline {6.2.2}Dynamique}{26}{subsection.6.2.2}
+\contentsline {subsection}{\numberline {6.2.3}Fonctions objectif}{26}{subsection.6.2.3}
+\contentsline {subsection}{\numberline {6.2.4}Contraintes}{27}{subsection.6.2.4}
+\contentsline {subsection}{\numberline {6.2.5}Pr\IeC {\'e}paration des donn\IeC {\'e}es}{28}{subsection.6.2.5}
+\contentsline {subsection}{\numberline {6.2.6}Partage du logiciel}{30}{subsection.6.2.6}
+\contentsline {chapter}{\numberline {7}Ajout de fonctionnalit\IeC {\'e}s}{31}{chapter.7}
+\contentsline {section}{\numberline {7.1}Muscles}{32}{section.7.1}
+\contentsline {subsection}{\numberline {7.1.1}Anatomie}{32}{subsection.7.1.1}
+\contentsline {subsection}{\numberline {7.1.2}Mod\IeC {\'e}lisation}{33}{subsection.7.1.2}
+\contentsline {section}{\numberline {7.2}Multi-phases}{34}{section.7.2}
+\contentsline {section}{\numberline {7.3}Exploitation des r\IeC {\'e}sultats}{36}{section.7.3}
+\contentsline {subsection}{\numberline {7.3.1}R\IeC {\'e}organisation des variables}{36}{subsection.7.3.1}
+\contentsline {subsection}{\numberline {7.3.2}Affichage graphique}{37}{subsection.7.3.2}
+\contentsline {subsection}{\numberline {7.3.3}Visualisation sur BiorbdViz}{38}{subsection.7.3.3}
+\contentsline {section}{\numberline {7.4}Sauvegarde du probl\IeC {\`e}me et des r\IeC {\'e}sultats}{39}{section.7.4}
+\contentsline {section}{\numberline {7.5}Simulation}{40}{section.7.5}
+\contentsline {chapter}{\numberline {8}Enseignements}{41}{chapter.8}
+\contentsline {part}{III\hspace {1em}Optimisation de la gestuelle du violoniste}{42}{part.3}
+\contentsline {chapter}{\numberline {9}Probl\IeC {\'e}matique}{44}{chapter.9}
+\contentsline {chapter}{\numberline {10}Mod\IeC {\'e}lisation initiale}{45}{chapter.10}
+\contentsline {section}{\numberline {10.1}Violon}{45}{section.10.1}
+\contentsline {subsection}{\numberline {10.1.1}Jeu}{45}{subsection.10.1.1}
+\contentsline {subsection}{\numberline {10.1.2}Mod\IeC {\'e}lisation}{45}{subsection.10.1.2}
+\contentsline {section}{\numberline {10.2}Muscles}{45}{section.10.2}
+\contentsline {subsection}{\numberline {10.2.1}Fonctionnement}{45}{subsection.10.2.1}
+\contentsline {subsection}{\numberline {10.2.2}Mod\IeC {\'e}lisation}{45}{subsection.10.2.2}
+\contentsline {chapter}{\numberline {11}\'Ecriture du probl\IeC {\`e}me}{46}{chapter.11}
+\contentsline {section}{\numberline {11.1}BiorbdOptim}{46}{section.11.1}
+\contentsline {section}{\numberline {11.2}Structure du probl\IeC {\`e}me}{46}{section.11.2}
+\contentsline {section}{\numberline {11.3}Ajout1}{46}{section.11.3}
+\contentsline {section}{\numberline {11.4}Ajout2}{46}{section.11.4}
+\contentsline {section}{\numberline {11.5}Ajout3}{46}{section.11.5}
+\contentsline {section}{\numberline {11.6}Forces externes}{46}{section.11.6}
+\contentsline {section}{\numberline {11.7}xia}{46}{section.11.7}
+\contentsline {chapter}{\numberline {12}R\IeC {\'e}sultats}{47}{chapter.12}
+\contentsline {part}{IV\hspace {1em}Conclusion}{48}{part.4}
+\contentsline {chapter}{\numberline {13}Conclusion}{49}{chapter.13}
+\contentsline {chapter}{\numberline {A}Annexes}{51}{appendix.A}

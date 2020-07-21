@@ -1,0 +1,70 @@
+\BOOKMARK [-1][-]{Doc-Start}{R\351sum\351}{}% 1
+\BOOKMARK [-1][-]{Doc-Start}{Remerciements}{}% 2
+\BOOKMARK [0][-]{section*.2}{Glossaire}{Doc-Start}% 3
+\BOOKMARK [-1][-]{part.1}{I Introduction}{}% 4
+\BOOKMARK [0][-]{chapter.1}{Stage international}{part.1}% 5
+\BOOKMARK [0][-]{chapter.2}{Laboratoire S2M}{part.1}% 6
+\BOOKMARK [1][-]{section.2.1}{Histoire}{chapter.2}% 7
+\BOOKMARK [1][-]{section.2.2}{Domaine d'expertise}{chapter.2}% 8
+\BOOKMARK [1][-]{section.2.3}{Effectif}{chapter.2}% 9
+\BOOKMARK [1][-]{section.2.4}{Recherche scientifique}{chapter.2}% 10
+\BOOKMARK [0][-]{chapter.3}{Contexte}{part.1}% 11
+\BOOKMARK [1][-]{section.3.1}{Covid-19}{chapter.3}% 12
+\BOOKMARK [1][-]{section.3.2}{T\351l\351travail}{chapter.3}% 13
+\BOOKMARK [1][-]{section.3.3}{Construction d'\351quipe}{chapter.3}% 14
+\BOOKMARK [-1][-]{part.2}{II BiorbdOptim}{}% 15
+\BOOKMARK [0][-]{chapter.4}{Outils de mod\351lisation}{part.2}% 16
+\BOOKMARK [1][-]{section.4.1}{Commande optimal}{chapter.4}% 17
+\BOOKMARK [1][-]{section.4.2}{Biorbd}{chapter.4}% 18
+\BOOKMARK [1][-]{section.4.3}{BiorbdViz}{chapter.4}% 19
+\BOOKMARK [0][-]{chapter.5}{R\351alisation}{part.2}% 20
+\BOOKMARK [1][-]{section.5.1}{N\351cessit\351 collective}{chapter.5}% 21
+\BOOKMARK [1][-]{section.5.2}{Commande optimale num\351rique}{chapter.5}% 22
+\BOOKMARK [2][-]{subsection.5.2.1}{Direct multiple shooting}{section.5.2}% 23
+\BOOKMARK [2][-]{subsection.5.2.2}{Exemple d'impl\351mentation}{section.5.2}% 24
+\BOOKMARK [1][-]{section.5.3}{D\351veloppement collaboratif}{chapter.5}% 25
+\BOOKMARK [2][-]{subsection.5.3.1}{Communication}{section.5.3}% 26
+\BOOKMARK [2][-]{subsection.5.3.2}{Logiciel sur mesure}{section.5.3}% 27
+\BOOKMARK [2][-]{subsection.5.3.3}{Article scientifique}{section.5.3}% 28
+\BOOKMARK [0][-]{chapter.6}{D\351veloppement initial}{part.2}% 29
+\BOOKMARK [1][-]{section.6.1}{Structure}{chapter.6}% 30
+\BOOKMARK [1][-]{section.6.2}{Mutualisation du code}{chapter.6}% 31
+\BOOKMARK [2][-]{subsection.6.2.1}{D\351finition du probl\350me}{section.6.2}% 32
+\BOOKMARK [2][-]{subsection.6.2.2}{Dynamique}{section.6.2}% 33
+\BOOKMARK [2][-]{subsection.6.2.3}{Fonctions objectif}{section.6.2}% 34
+\BOOKMARK [2][-]{subsection.6.2.4}{Contraintes}{section.6.2}% 35
+\BOOKMARK [2][-]{subsection.6.2.5}{Pr\351paration des donn\351es}{section.6.2}% 36
+\BOOKMARK [2][-]{subsection.6.2.6}{Partage du logiciel}{section.6.2}% 37
+\BOOKMARK [0][-]{chapter.7}{Ajout de fonctionnalit\351s}{part.2}% 38
+\BOOKMARK [1][-]{section.7.1}{Muscles}{chapter.7}% 39
+\BOOKMARK [2][-]{subsection.7.1.1}{Anatomie}{section.7.1}% 40
+\BOOKMARK [2][-]{subsection.7.1.2}{Mod\351lisation}{section.7.1}% 41
+\BOOKMARK [1][-]{section.7.2}{Multi-phases}{chapter.7}% 42
+\BOOKMARK [1][-]{section.7.3}{Exploitation des r\351sultats}{chapter.7}% 43
+\BOOKMARK [2][-]{subsection.7.3.1}{R\351organisation des variables}{section.7.3}% 44
+\BOOKMARK [2][-]{subsection.7.3.2}{Affichage graphique}{section.7.3}% 45
+\BOOKMARK [2][-]{subsection.7.3.3}{Visualisation sur BiorbdViz}{section.7.3}% 46
+\BOOKMARK [1][-]{section.7.4}{Sauvegarde du probl\350me et des r\351sultats}{chapter.7}% 47
+\BOOKMARK [1][-]{section.7.5}{Simulation}{chapter.7}% 48
+\BOOKMARK [0][-]{chapter.8}{Enseignements}{part.2}% 49
+\BOOKMARK [-1][-]{part.3}{III Optimisation de la gestuelle du violoniste}{}% 50
+\BOOKMARK [0][-]{chapter.9}{Probl\351matique}{part.3}% 51
+\BOOKMARK [0][-]{chapter.10}{Mod\351lisation initiale}{part.3}% 52
+\BOOKMARK [1][-]{section.10.1}{Violon}{chapter.10}% 53
+\BOOKMARK [2][-]{subsection.10.1.1}{Jeu}{section.10.1}% 54
+\BOOKMARK [2][-]{subsection.10.1.2}{Mod\351lisation}{section.10.1}% 55
+\BOOKMARK [1][-]{section.10.2}{Muscles}{chapter.10}% 56
+\BOOKMARK [2][-]{subsection.10.2.1}{Fonctionnement}{section.10.2}% 57
+\BOOKMARK [2][-]{subsection.10.2.2}{Mod\351lisation}{section.10.2}% 58
+\BOOKMARK [0][-]{chapter.11}{\311criture du probl\350me}{part.3}% 59
+\BOOKMARK [1][-]{section.11.1}{BiorbdOptim}{chapter.11}% 60
+\BOOKMARK [1][-]{section.11.2}{Structure du probl\350me}{chapter.11}% 61
+\BOOKMARK [1][-]{section.11.3}{Ajout1}{chapter.11}% 62
+\BOOKMARK [1][-]{section.11.4}{Ajout2}{chapter.11}% 63
+\BOOKMARK [1][-]{section.11.5}{Ajout3}{chapter.11}% 64
+\BOOKMARK [1][-]{section.11.6}{Forces externes}{chapter.11}% 65
+\BOOKMARK [1][-]{section.11.7}{xia}{chapter.11}% 66
+\BOOKMARK [0][-]{chapter.12}{R\351sultats}{part.3}% 67
+\BOOKMARK [-1][-]{part.4}{IV Conclusion}{}% 68
+\BOOKMARK [0][-]{chapter.13}{Conclusion}{part.4}% 69
+\BOOKMARK [0][-]{appendix.A}{Annexes}{part.4}% 70

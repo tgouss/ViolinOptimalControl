@@ -94,7 +94,7 @@ for j in range(N):
 
 # Solution
 opti.solver("ipopt")
-sol = opti.solve() # appel au solveur
+sol = opti.solve()  # appel au solveur
 
 x_opt = sol.value(x)
 u_opt = sol.value(u)
@@ -157,4 +157,3 @@ plt.show()
 
 
 BiorbdViz.BiorbdViz("pendule.bioMod").load_movement(q_int[:, :61])
-

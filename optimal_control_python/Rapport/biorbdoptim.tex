@@ -2,29 +2,23 @@
     \chapter[Outils de modélisation]{Outils de modélisation numérique du mouvement}
     
     
-Avant de rentrer dans le vif du sujet, il est nécessaire de définir et décrire quelques notions et logiciels sans quoi on ne peut comprendre l'intérêt ou le fonctionnement de \emph{BiorbdOptim}.
+Avant de rentrer dans le vif du sujet, il est nécessaire de définir et décrire quelques notions et logiciels sans quoi on ne peut comprendre l'intérêt ou le fonctionnement de \emph{\gls{biorbdoptim}}.
 
-Le système d'exploitation \emph{\gls{linux}} a été le premier outil utilisé par la quasi-totalité des contributeurs à BiorbdOptim, il est intéressant de noter que la couche de compatibilité \emph{Windows Subsystem for Linux} a permis à quelques utilisateurs de travailler sur BiorbdOptim depuis le système d'exploitation \emph{windows}. Afin de pouvoir simplifier la gestion des paquets et faciliter le déploiement du logiciel, la distribution libre et open source \gls{anaconda} a été grandement utilisée.
+Le système d'exploitation \emph{\gls{linux}} a été le premier outil utilisé par la quasi-totalité des contributeurs à \gls{biorbdoptim}, il est intéressant de noter que la couche de compatibilité \emph{Windows Subsystem for Linux} a permis à quelques utilisateurs de travailler sur \gls{biorbdoptim} depuis le système d'exploitation \emph{Windows}. Afin de pouvoir simplifier la gestion des paquets et faciliter le déploiement du logiciel, la distribution libre et open source \gls{anaconda} a été grandement utilisée.
 
-des langages de programmation Python appliqué au développement d'applications dédiées à la science des données et à l'apprentissage automatique (traitement de données à grande échelle, analyse prédictive, calcul scientifique), qui vise à 4
+Enfin, la programmation en tant que telle, a été conduite grâce grâce aux environnements de développement \gls{pycharm} pour le langage python, et \gls{qt} pour le langage c++. ces deux environnements sont complets, ils proposent entre autre, un débogueur graphique, des outils de publication de code sur github ainsi que des licences étudiantes gratuites.
+\label{pycharm}
 
         \section{Commande optimal}
         
 %expliquer pourquoi on parle de commande optimal
 \label{commande_optimale}
 La commande optimale est une méthode utilisée dans le cas d’un problème de dynamique
-régit par des équations différentielles.
+régit par des équations différentielles. L’objectif est d’emmener le système d’un état initial jusqu’à un état final tout en maximiser ou minimiser des indices de performances nommées ``fonctions-objectifs'' et en respectant des contraintes.
 
-L’objectif est d’amener le système d’un état initial jusqu’à un état final tout en maximiser ou minimiser des indices de performances nommées ``fonctions-objectifs'' et en respectant des contraintes.
+L'utilisation de commande optimal est particulièrement approprié lorsque les mouvements d'un système sont dynamiques. A titre d'exemple, on l'utilise en biomécanique pour modéliser les mouvements du corps humain. La notion dynamique, réside ici dans l'impossibilité pour le système nerveux à contrôler la position finale d'un membre, son contrôle se limite à émettre un signal au muscle par le système nerveux. Le mouvement du membre est alors régit par des contraintes tels que le fonctionnement du muscle ou la gravité. 
 
-L’algorithme de commande optimale a pour but de générer les paramètres d’entrée
-du système afin de passer de l’état initial à l’état final en respectant les contraintes
-et en minimisant la fonction objectif.
-
-L'utilisation du contrôle optimal est particulièrement approprié lorsque les déplacements sont difficilement contrôlables. A titre d'exemple, on l'utilise en biomécanique pour modéliser les mouvements du corps humain. La notion \emph{difficilement contrôlables} réside ici dans l'impossibilité pour le système nerveux à contrôler la position finale d'un membre, son contrôle se limite à émettre un signal au muscle par le système nerveux. Le mouvement du membre est alors régit par des contraintes tels que le fonctionnement du muscle ou la gravité. 
-
-Le principe consiste à agir sur les commandes (variables d’entrées) qui à partir des équations du système donnent les états différentiels du système dynamique. On vérifie ensuite si les contraintes sont respectées
-et si la valeur de la fonction objectif est plus petite qu’une limite pré-établie. Si c’est le cas, la valeur constitue la solution optimale, sinon on modifie les commandes pour recommencer le processus.
+Le principe consiste à agir sur les commandes (variables d’entrées) qui à partir des équations du système donnent les états différentiels du système dynamique. On vérifie ensuite si les contraintes sont respectées et si la valeur de la fonction objectif est plus petite qu’une limite pré-établie. Si c’est le cas, la valeur constitue la solution optimale, sinon on modifie les commandes selon un algorithme de gradient pour recommencer le processus.
 
 Il est possible de schématiser le fonctionnement de la commande optimale comme suit :
 
@@ -35,28 +29,31 @@ Il est possible de schématiser le fonctionnement de la commande optimale comme 
 \end{center}
 \end{figure}
 
-La difficulté de la commande optimale réside dans la détermination de l’influence des modifications en entrée sur la fonction objectif tout en respecter les contraintes.
-Un problème de commande optimale possède nécessairement trois composantes :
+La difficulté de la commande optimale réside dans la détermination de l’influence des modifications en entrée sur la fonction objectif tout en respectant les contraintes.
+Un problème de commande optimale possède \emph{a priori} trois composantes :
 \begin{itemize}
 \setlength\itemsep{-0.5em}
 \item une fonction objectif à minimiser.
-\item un ensemble de contraintes à respecter.
+\item un ensemble de contraintes à respecter \emph{(pas nécessairement)}.
 \item un système dynamique.
 \end{itemize}
 
 
-Mathématiquement, on peut le définir de manière simplifiée comme suit :
+Mathématiquement, on peut le définir génériquement comme suit :
 
 \begin{description}
 \setlength\itemsep{-0.5em}
 \item[Fonction objectif :] \[min\ J(t_{F} , x(t_{F})) + \int_{t_{0}}^{t_{F}} { \phi (t, x(t), u(t), p)dt} \]
-\item[Contraintes dynamique :] \[\dot{x}(t_{F}) = f (t_{F} , x(t_{F}), u(t)) \]
+\item[Contraintes dynamique :] \[\dot{x}(t) = f (t , x(t), u(t), p) \]
 \item[Contraintes de bornes :] \[x_{min} \leq x(t) \leq x_{max} \]  \[u_{min} \leq u(t) \leq u_{max} \] \[x(t_{0}) = x_{0}\] \[x(t_{F}) = x_{F}\]
 \end{description}
 
 avec :
 \begin{description}
 \setlength\itemsep{-0.5em}
+\item[J :] fonction de Mayer.
+\item[$\phi$ :] Lagrangien.
+\item[f :] fonction décrivant la dynamique.
 \item[t$_{\text{0}}$ :] l’instant initial.
 \item[t$_{\text{F}}$ :] l’instant final.
 \item[p :] les paramètres à optimiser lors de la résolution.
@@ -64,40 +61,35 @@ avec :
 \item[x :] le vecteur des états différentiels.
 \item[u$_{\text{min}}$, u$_{\text{max}}$ :] les contraintes de bornes des commandes.
 \item[x$_{\text{min}}$, x$_{\text{max}}$ :] les contraintes de bornes des états différentiels.
-\item[x$_{\text{0}}$, x$_{\text{F}}$ :] états initiaux et finales.
+\item[x$_{\text{0}}$, x$_{\text{F}}$ :] états initiaux et finaux.
 \end{description}
 
 
-Le premier terme de la fonction objectif est un \emph{terme de Mayer}, il traduit un objectif final, mesuré à $t_{F}$, tandis que l’intégrale, dit \emph{terme de Lagrange}, traduit un objectif sur l’ensemble du mouvement mesuré \emph{à chaque instant} entre $t_{0}$ et $t_{F}$.
+Le premier terme de la fonction objectif est un \emph{terme de Mayer : J}, il traduit un objectif final, mesuré à $t_{F}$, tandis que l’intégrale, dit \emph{terme de Lagrange : $\phi$}, traduit un objectif sur l’ensemble du mouvement mesuré \emph{à chaque instant} entre $t_{0}$ et $t_{F}$. %Détailler ici :
+La contrainte dynamique lie les états, commandes et paramètres aux états différentiels, en connaissant $x_{k}$ et $u_{k}$ avec $k \in [0, N-1]$ ainsi que $p$, on obtient $\dot{x}$, qui l'on peut intégrer sur $t_{F} - t_{0}$ . Les contraintes de bornes c’est-à-dire les limites des variables d’états et des commandes permettent de définir le cadre du problème. Elles peuvent réduire le champ de recherche de l’optimiseur mais peuvent également rendre le problème numériquement impossible à résoudre, lorsqu'elles sont incompatibles.
 
-L’équation différentielle qui décrit la dynamique du modèle permet de calculer l’état suivant à partir de l’état précédent et des commandes.
-
-Les contraintes de bornes c’est-à-dire les limites des variables d’états et des commandes permettent de définir le cadre du problème. Elles peuvent réduire le champ de recherche de l’optimiseur mais peuvent également rendre le problème numériquement impossible à résoudre.
-
-L'optimiseur est le logiciel chargé d'agir donc sur les commandes pour aboutir à une solution. Les
-commandes peuvent être diverses, on peut citer non-exhaustivement : accélérations, moments articulaires, activations musculaires, excitations neuronales.
+L'optimiseur est le logiciel chargé d'agir sur les commandes pour aboutir à une solution. Les commandes peuvent être diverses, on peut citer, dans un contexte biomécanique et non-exhaustivement : accélérations, moments articulaires, activations musculaires, excitations neuronales.
         
         \section{Biorbd}
         
         
-La librairie Biorbd, codée au sein du laboratoire s2m en très grande partie par M. Benjamin \textsc{Michaud}. possède un grand nombre d’outils de dynamique et de modélisation. Le nom de cette librairie provient de l'association de :
+La librairie \gls{biorbd}, codée au sein du laboratoire S2M en très grande partie par M. Benjamin \textsc{Michaud}. possède un grand nombre d’outils de dynamique et de modélisation. Le nom de cette librairie provient de l'association de :
 
 \begin{description}
 \setlength\itemsep{-0.5em}
 \item[bio :] pour biomécanique, domaine d’étude du laboratoire
-\item[rbd :] l’essentiel de la librairie s’appuie sur la bibliothèque de fonction de calculs mécaniques
-des corps rigides RBDL (Rigid Body Dynamics Library).
+\item[rbd :] sigle de \emph{rigid body dynamics}, correspond aux mécaniques mises en jeu, dans la dynamique des corps rigides. \gls{biorbd} s’appuie sur la bibliothèque de fonction de calculs RBDL (Rigid Body Dynamics Library).
 \end{description}
 
-La librairie gére la création et l'accès à un modèle biomécanique stocké sous le forme d'un fichier ayant un extension \emph{.bioMod}. Les caractéristiques du modèles y sont définies avec une syntaxe précise. Une image valant mille mots, l'exemple ci-dessous décrit un cube dans l'espace nommé ayant :
+La librairie gère la création et l'accès à un modèle biomécanique stocké sous le forme d'un fichier ayant un extension \emph{.bioMod}. Les caractéristiques du modèles y sont définies avec une syntaxe précise. L'exemple ci-dessous décrit un cube dans l'espace nommé ayant :
 
 \begin{itemize}
-\item un \emph{segment : ``Ground''} immobile faisant office de repère global, , il se caractérise par :
+\item un \emph{segment base : ``Ground''} immobile faisant office de repère global, , il se caractérise par :
     \begin{itemize}
     \vspace{-0.5em}
     \setlength\itemsep{-0.2em}
-    \item un \emph{marqueur : ``m1''} fixés sur le segment Ground aux coordonnées $(1, 0, 0)$.
-    \item un \emph{marqueur : ``m2''} fixés sur le segment Ground aux coordonnées $(2, 0, 0)$.
+    \item un \emph{repère : ``m1''} fixés sur le segment Ground aux coordonnées $(1, 0, 0)$.
+    \item un \emph{repère : ``m2''} fixés sur le segment Ground aux coordonnées $(2, 0, 0)$.
     \end{itemize}
 \item un \emph{segment : ``Seg1''} représentant le cube, il se caractérise par :
     \begin{itemize}
@@ -109,7 +101,7 @@ La librairie gére la création et l'accès à un modèle biomécanique stocké 
     \item une \emph{masse} de 1 kg.
     \item une \emph{matrice d'inertie} caractérisant la répartition de la masse dans le volume, moment d’inertie identique selon les 3 axes.
     \item un \emph{centre de masse} aux coordonnées $(0, 0, 0)$.
-    \item un \emph{ensemble de mesh} : segments représentant les arêtes du cube.
+    \item un \emph{ensemble de traits --- \emph{mesh}} : segments représentant les arêtes du cube.
     \end{itemize}
 \end{itemize}
 
@@ -121,53 +113,56 @@ La librairie gére la création et l'accès à un modèle biomécanique stocké 
 \caption{Modèle cube.bioMod}
 \end{figure}
 
-En première approximation, un segment peut être assimilable à un membre du corps humain, et un marqueur à un point fixe dans le repère du segment. Un segment peut être défini dans le repère global ou à partir d'un segment existant, par exemple un avant-bras peut être défini à partir du bout du bras. La librairie propose une grande quantité d'éléments biomécaniques, on peut citer non-exhaustivement :
+En première approximation, un segment peut être assimilable à un membre du corps humain, et un repère à un point fixe dans le repère du segment. Un segment peut être défini dans le repère global ou à partir d'un segment existant, par exemple un avant-bras doit être défini à partir du bout du bras. La librairie propose une grande quantité d'éléments biomécaniques, on peut citer non-exhaustivement :
 \begin{itemize}
 \setlength\itemsep{-0.5em}
 \item des segments.
-\item des marqueurs.
+\item des repères.
 \item des muscles.
 \item des forces de contact.
 \item des forces externes.
 \end{itemize}
 
-Biobrd comprend également une importante quantité de fonctions mécaniques calculatoires. La librairie repose, entre autre,
-sur \emph{\gls{casadi}} \footnotemark[3] : un outil open-source pour l'optimisation non linéaire et la différenciation algorithmique. La différenciation algorithmique de casadi permet un gain considérable lors de la dérivation des équations différentielles.
+\gls{biorbd} comprend également une importante quantité de fonctions mécaniques calculatoires. La librairie repose, entre autre,
+sur \emph{\gls{eigen}}\footnotemark[4] : librairie d'algèbre linéaire hautement performante, et \emph{\gls{casadi}}\footnotemark[3] : un outil open-source pour l'optimisation non linéaire et la différenciation algorithmique. La différenciation algorithmique de \gls{casadi} permet un gain considérable lors de la dérivation des équations différentielles. \gls{casadi} sera ainsi utilisé dans l'exécution de commande optimale, afin de tirer profit de sa différenciation algorithmique, tandis que \gls{eigen} sera privilégiée car plus rapide dans l'utilisation de \gls{biorbdviz}. 
 
 
-Téléchargeable en libre accès sur GitHub\footnotemark[1] la librairie Biorbd se développe encore au sein du laboratoire, qui essaie de démocratiser son utilisation.
+Téléchargeable en libre accès sur \gls{github}\footnotemark[1] la librairie \gls{biorbd} se développe encore au sein du laboratoire, qui essaie de démocratiser son utilisation.
 
 \footnotetext[1]{https://github.com/pyomeca/biorbd}
 \footnotetext[3]{https://web.casadi.org/}
+\footnotetext[4]{https://gitlab.com/libeigen/eigen}
 
 
         
         \section{BiorbdViz}
-
-Biorbd possède également une interface de programmation écrite en Python : \emph{biorbd-viz}. Elle permet à partir d'un fichier \emph{.bioMod} de :
+\label{biorbdviz}
+\gls{biorbd} possède également une interface de programmation écrite en Python : \emph{\gls{biorbdviz}}. Elle permet à partir d'un fichier \emph{.bioMod} de :
 
 \begin{itemize}
 \setlength\itemsep{-0.5em}
 \item visualiser en trois dimensions le modèle.
-\item visualiser un mouvement en trois dimensions du modèle à partir d'un tableau de position \emph{\gls{numpy}}
+\item visualiser un mouvement en trois dimensions du modèle à partir d'un tableau de position \emph{\gls{numpy}}.
+\item enregistrer une vidéo du mouvement.
+\item afficher graphiquement l'évolution des paramètres musculaires.
 \end{itemize}
 
-Pour chaque degré de liberté, biorbd-viz dispose de curseurs indiquant la valeur actuelle par rapport à l'intervalle autorisé.
+Pour chaque degré de liberté, \gls{biorbdviz} dispose de curseurs indiquant la valeur actuelle par rapport à l'intervalle autorisé.
 A titre d'illustration, le cube initialement à 0 sur chacun de ses degré de liberté a subit d'abord une rotation autour de l'axe de 0.74 radians puis une translation de -0.52 mètres selon l'axe z.
 
-\`A l'instar de biorbd, biorbd-viz peut être téléchargé sur GitHub\footnotemark[2].
+\`A l'instar de \gls{biorbd}, \gls{biorbdviz} peut être téléchargé sur \gls{github}\footnotemark[2].
 
 
 \footnotetext[2]{https://github.com/pyomeca/biorbd-viz}
 
-\begin{figure}[H]
+\begin{figure}[ht]
 \begin{center}
 \includegraphics[width=15cm, keepaspectratio]{images/biorbdviz1.png}
 \rule{\linewidth}{0mm}
 \includegraphics[width=15cm, keepaspectratio]{images/biorbdviz2.png}
 \rule{\linewidth}{0mm}
 \includegraphics[width=15cm, keepaspectratio]{images/biorbdviz3.png}
-\caption{Représentation sous biorbd-viz du modèle cube.bioMod.}
+\caption{Représentation sous \gls{biorbdviz} du modèle cube.bioMod.}
 \end{center}
 \end{figure}
 
@@ -176,73 +171,96 @@ A titre d'illustration, le cube initialement à 0 sur chacun de ses degré de li
 
         \section{Nécessité collective}
         
-Comme présenté précédemment (section~\ref{equipe_control_optimal} p.~\pageref{equipe_control_optimal}), l'équipe de Commande optimale regroupe une dizaine de personne. L'épidémie du Covid-19 a contraint d'autres chercheurs, privés d'expérience à mener, à rejoindre le groupe.
+Comme présenté précédemment (section~\ref{equipe_control_optimal} p.~\pageref{equipe_control_optimal}), l'équipe de Commande optimale regroupe une dizaine de personne. L'épidémie du Covid-19 a contraint d'autres étudiants, privés d'expérience à mener, à rejoindre le groupe.
 
-Chacun travaille sur une problématique biomécanique, et fait appel à la commande optimale pour la résoudre. Rapidement,  un constat a émané du groupe : pour appliquer du contrôle optimal, chaque chercheur programme majoritairement les mêmes instructions que ses collègues.
-Benjamin \textsc{Michaud} a alors suggéré d'écrire une base commune permettant de mutualiser l'écriture des problèmes. Benjamin \textsc{Michaud}, mon homologue Paul \textsc{Wegiel} et moi avons entamé la programmation de cette base au commencement de nos stages.
+Chacun travaille sur une problématique biomécanique, et fait appel à la commande optimale pour la résoudre. Rapidement,  un constat a émané du groupe : pour appliquer du contrôle optimal, chaque étudiant programme majoritairement les mêmes instructions que ses collègues.
+Face au constat qu'aucun logiciel ne permettait de résoudre correctement un problème de commande optimale semblable à celui du jeu violonistique, Benjamin \textsc{Michaud} a alors suggéré d'écrire une base commune permettant de mutualiser l'écriture des problèmes.
+
+Benjamin \textsc{Michaud}, mon homologue Paul \textsc{Wegiel} et moi avons entamé la programmation de cette base au commencement de nos stages. La motivation de l'écriture de cette base est son utilisation dans le cadre de nos projets respectifs : la maximisation de la hauteur d'un saut pour Paul \textsc{Wegiel}, et l'optimisation du mouvement du violoniste afin de minimiser la fatigue musculaire pour moi. Il est pertinent de noter que Benjamin \textsc{Michaud} est le responsable de ces deux projets, la réalisation de \gls{biorbdoptim} se justifie au travers de ces deux études.
+
+%violon + jumper
         
         
-        \section{Commande optimale numérique}
-        
-        
+        \section{Commande optimale numérique}        
     
 La solution d’un problème de commande optimale est une équation générale, obtenue comme définie précédemment (section~\ref{commande_optimale} p.~\pageref{commande_optimale}), à partir d'une fonction objectif, d'un ensemble de contraintes et d'un système dynamique. En pratique, la plupart des problèmes sont trop complexes pour trouver la solution exacte, on procède donc à une résolution numérique.
 
             \subsection{Direct multiple shooting}
 
-Pour cela, il existe plusieurs approches, au laboratoire, le direct multiple shooting est la plus utilisée. Il consiste à diviser la durée du problème en intervalles, puis à calculer les états en chaque point, appelé nœud. Entre ces nœuds, les commandes sont déterminées, on calcule donc l’état au prochain nœud à partir de l’état précédent et des commandes sur l’intervalle.
-Les commandes sont définies constantes sur l’intervalle afin de simplifier le problème, cependant, elles pourraient suivre une fonction définie.
+Pour cela, il existe plusieurs approches; au laboratoire, le direct multiple shooting est la plus utilisée. Il consiste à discrétiser la durée du problème en intervalles, puis à calculer les états en chaque point, appelé nœud. Entre ces nœuds, les commandes sont déterminées, on calcule donc l’état au prochain nœud à partir de l’état précédent et des commandes sur l’intervalle via le système dynamique et d'une intégration.
+Les commandes sont définies selon une fonction en escalier sur l'intervalle $[t_{0}, t_{f}]$ afin de simplifier le problème, cependant, elles pourraient suivre une fonction plus variable.
 
 Mathématiquement, on doit définir de surcroît :
 
 \begin{description}
 \setlength\itemsep{-0.5em}
-\item[Subdivision du temps :] \[t_{0} < t_{1} < ... < t_{N} \text{\tab avec \tab } \forall i \in [0, N] \text{  :  } t_{i} = t_{0} + i \cdot \frac{t_{F}-t_{0}}{N} \]
+\item[Discrétisation du temps :] \[t_{0} < t_{1} < ... < t_{N} \text{\tab avec \tab } \forall i \in [0, N] \text{  :  } t_{i} = t_{0} + i \cdot \frac{t_{F}-t_{0}}{N} \]
 \end{description}
 
-Les états initiaux sont les points noirs, les commandes sont en pointillés. L'intégration des états initiaux via les commandes permettent d'obtenir les points blancs ainsi que le chemin pour s'y rendre.
+Les états initiaux sont les points noirs (notés $S_{i}$, $i \in [0, N-1]$), les commandes sont en pointillés. L'intégration des états initiaux via les commandes permet d'obtenir les points blancs (notés $X_{i}$, $i \in [1, N]$) ainsi que le chemin pour s'y rendre.
 
+\label{dms}
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=12cm, keepaspectratio]{images/dms.png}
-\caption{Illustration of direct multiple shooting. Ren Z. Skjetne R. Gao Z. \cite{dms}}
+\caption{Illustration de l'approche direct multiple shooting. Ren Z. Skjetne R. Gao Z. \cite{dms}}
+\label{fig:dms}
 \end{center}
 \end{figure}
-ICCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCI PARLER DE LA CONTINUITE CONTRAINE %TODO
 
-Il est pertinent de remarquer que le nombre de nœuds influe considérablement sur la convergence du problème : s'il est faible la solution sera approximative, à l'inverse s'il est élevé, l'exécution se verra prolongée.
+Une remarque fondamentale est nécessaire ici, si l'on souhaite que le mouvement soit réaliste, c'est-à-dire que les positions soient continues, il faut s'assurer que :
+\begin{description}
+\setlength\itemsep{-0.5em}
+\item[Contrainte de continuité :] \[\forall i \in [0, N-1] : S_{i} = X_{i+1} \]
+\end{description}
 
-Le travail de résolution, c'est-à-dire déterminer une solution : les commandes et les états est accompli par un logiciel appelé solveur, nous évoquerons deux d'entre eux : \emph{\gls{ipopt}} et \emph{\gls{acados}}.
-
-Le chercheur souhaitant appliqué un algortihme de commande optimale, doit sélectionner un solveur, puis l’exécuter en lui procurrant les paramètres nécessaires à la bonne définiton du problème.
+Il est pertinent de remarquer que le nombre de nœuds influe considérablement sur la convergence du problème : s'il est faible la solution sera approximative, à l'inverse s'il est élevé, la résolution se verra prolongée.
+Le travail de résolution, c'est-à-dire déterminer une solution --- les commandes et les états est accompli par un logiciel appelé solveur, nous évoquerons deux d'entre eux : \emph{\gls{ipopt}} et \emph{\gls{acados}}. Afin d'appliquer un algorithme de commande optimale, il faut choisir un solveur, puis l’exécuter en lui procurant les paramètres nécessaires à la bonne définition du problème. Le solveur procédera itération après itération à des variations des commandes en fonction d'un gradient calculé à chaque itération.
         
             \subsection{Exemple d'implémentation}
 
-Afin de me familiariser aux outils de commande optimale, ma première mission a été d'implémenter un problème simple de problème de commande optimale. On considère un pendule ayant un degré de rotation autour d'un axe y, et une translation selon un axe x. Le problème consiste à amener le pendule d'une position verticale vers le bas, à une position verticale vers le haut avec une commande nulle selon la rotation.
+Afin de me familiariser aux outils de commande optimale, ma première mission a été d'implémenter un problème simple de commande optimale. Je l'ai codé dans le langage Python, langage très accessible, nous avons convenu avec Benjamin \textsc{Michaud} que \gls{biorbdoptim} devra être développé en Python pour simplifier et populariser son utilisation et développement. J'ai travaillé avec l'environnement de développement \gls{pycharm}, présenté précédemment (section~\ref{pycharm} p.~\pageref{pycharm}).
+
+On considère un pendule ayant un degré de rotation autour d'un axe y, et une translation selon un axe x. Le problème consiste à amener, en cinq secondes, le pendule à partir d'une position verticale vers le bas, à une position verticale vers le haut avec une commande nulle selon la rotation. On impose également des positions initiales selon la translation identiques à 0, et des vitesses finales et initiales nulles sur les deux degrés de liberté. Concernant l'objectif, il consiste simplement à minimiser les commandes, la commande selon la rotation étant nulle, il consiste à minimiser les commandes de rotation.
 
 L'implémentation du problème nécessite la création d'un fichier .bioMod décrivant le pendule disponible en annexe 
 (section~\ref{code_pendule_bioMod} p.~\pageref{code_pendule_bioMod}), et d'un fichier appelant le solveur et décrivant le problème (section~\ref{code_pendule_python} p.~\pageref{code_pendule_python}).
 
 Il n'est pas nécessaire d’éplucher toutes les lignes de code, il suffit de retenir qu'il est nécessaire de définir le problème comme présenté précédemment (section~\ref{commande_optimale} p.~\pageref{commande_optimale}).  On accède aux caractéristiques du modèle .bioMod, via les fonctions \emph{model. ...}.
 L'utilisation du solveur ipopt impose une syntaxe, on utilise le module \emph{opti} afin de spécifier :
+\label{pendule}
 \begin{description}
 \setlength\itemsep{-0.2em}
-\item [les degrés de liberté et le nombre de noeuds :] 2 degrés avec 31 noeuds - \emph{lignes 27-28}.
-\item [le système dynamique :] écrite avec le module casadi - \emph{lignes 31-64}.
-\item [les fonction objectif :] minimiser les commandes - \emph{lignes 70-75}.
-\item [les contraintes :] de continuité, de bornes, des états initiaux et finales - \emph{ligne 67 / lignes 77-93}.
-\item [l'appel au solveur :] \emph{ligne 97}.
+\item [les degrés de liberté et le nombre de nœuds :] 2 degrés avec 31 nœuds --- \emph{lignes 27-28}.
+\item [le système dynamique :] écrite avec le module casadi --- \emph{lignes 31-64}.
+\item [les fonctions objectifs :] minimiser les commandes --- \emph{lignes 70-75}.
+\item [les contraintes :] de continuité, de bornes, des états initiaux et finaux --- \emph{ligne 67 / lignes 77-93}.
+\item [l'appel au solveur] --- \emph{ligne 97}.
 \end{description}
 
-La suite du fichier permet, à partir de la solution renvoyé par le solveur, d'afficher avec le module matplotlib les valeurs des états et commandes en fonction du temps. Enfin, l'appel à biorbd-viz, l'interface trois dimension de biorbd, avec chargement des positions permet de visualiser le mouvement. 
+La suite du fichier permet, à partir de la solution renvoyé par le solveur, d'afficher avec le module \gls{matplotlib} les valeurs des états et commandes en fonction du temps. Enfin, l'appel à \gls{biorbdviz}, l'interface trois dimension de \gls{biorbd}, avec chargement des positions permet de visualiser le mouvement. 
 
+\newpage
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=\textwidth, keepaspectratio]{images/pendule_graphe.png}
 \caption{\'Evolution des états et commandes en fonction du temps.}
+\label{fig:pendule_graphe}
 \end{center}
 \end{figure}
 \newcommand\w{8cm}
+
+La solution retournée par le solveur est correcte :
+\begin{description}
+\setlength\itemsep{-0.2em}
+\item[réalisation du demi tour :] la position \emph{base\_RotY} passe de 0 à 3.14 radians (Figure~\ref{fig:pendule_graphe} p.~\pageref{fig:pendule_graphe}).
+\item[aucune commande rotation :] la commande sur \emph{base\_RotY} demeure nulle (Figure~\ref{fig:pendule_graphe} p.~\pageref{fig:pendule_graphe}).
+\item[position initiale et finale selon la translation nulle :] la position \emph{base\_TransX} débute à 0 et retombe à 0 (Figure~\ref{fig:pendule_graphe} p.~\pageref{fig:pendule_graphe}).
+\item [vitesses finales et initiales nulles :] les vitesses débutent de 0 et finissent à 0 selon les deux degrés (Figure~\ref{fig:pendule_graphe} p.~\pageref{fig:pendule_graphe}).
+\item[respect de la durée de l'expérience :] \emph{5 secondes} (Figure~\ref{fig:pendule_graphe} p.~\pageref{fig:pendule_graphe}).
+\end{description}
+
+Cette première utilisation de \gls{biorbd}, \gls{casadi}, \gls{ipopt}, \gls{biorbdviz} et du module matplotlib initie le début du logiciel \gls{biorbdoptim}. Après et à partir de cet exemple, nous avons programmé le logiciel.
 
 \newpage
 
@@ -259,49 +277,497 @@ La suite du fichier permet, à partir de la solution renvoyé par le solveur, d'
 \end{tabular}
 \end{center}
 \end{figure}
+ \newpage
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=16cm, keepaspectratio]{images/pendule13.png}
+\caption{Mouvement sous \gls{biorbdviz} du modèle pendule.bioMod.}
+\end{center}
+\end{figure}
 
 
 
+        \section{Développement collaboratif} %inverse avec section précédente ?
+        
+Initialement, le logiciel a été développé par Benjamin \textsc{Michaud}, Paul \textsc{Wegiel} et moi-même. Progressivement, l'intégralité du groupe de commande optimale a contribué au développement du logiciel, \emph{a minima} en tant qu'utilisateur. 
+%annexe présentation moi
+
+            \subsection {Communication}
+            
+Afin d'assurer la cohérence du développement, l'équipe utilise github et gitkraken présentés précédemment (section~\ref{outils} p.~\pageref{outils}) ainsi que Microsoft teams.
+L’intérêt de \gls{github} repose sur la possibilité d'avoir des développements parallèles opérés par différentes personnes ou non. Conceptuellement, il existe une branche principale, théoriquement toujours opérationnelle : nommée branche \emph{master de pyomeca}. Lorsqu'un développement est souhaité, le programmeur crée une branche parallèle à celle-ci. Il programme sur son ordinateur ce que nécessaire, afin de sauvegarder ses modifications, il les regroupe et les archive sur sa branche, en anglais on parle de \emph{commit}. Lorsque son développement est opérationnel, le programmeur fusionne sa branche avec la branche master de pyomeca, en anglais on parle de \emph{merge}. Il est important de garder en tête que l'administrateur du projet, ici Benjamin \textsc{Michaud} est chargé de valider la requête de fusion, et de régler avec les développeurs les éventuels conflits : développement parallèles incompatibles et problèmes inhérents à l'implémentation du développeur.
+Github fonctionne en ligne de commandes, gitkraken permet de gérer les branches, et plus largement le projet graphiquement.
+Il est pertinent de remarquer que l'ensemble du code, des noms de commits, des issues et plus globalement de toute information publique est écrit en anglais, dans un souci de collaboration et distribution internationale.
+
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=\textwidth, keepaspectratio]{images/gitkraken.png}
+\caption{Capture d'écran du logiciel gitkraken, on y voit plusieurs branches qui fusionnent. Chaque ligne correspond à un \emph{commit} ou un \emph{merge} d'une des branches.}
+\end{center}
+\end{figure}
+
+Dans une vision à long terme, github propose d'utiliser des \emph{issues}, tout le monde peut écrire un rapide descriptif d'une fonctionnalité à implémenter, d'un bogue à résoudre, et le partager à ses collègues via une \emph{issue}, il peut alors s'en suivre une discussion à son propos.
+\newpage
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=\textwidth, keepaspectratio]{images/issues.png}
+\caption{Capture d'écran de l'interface web de github, section issues. Chaque issue est décrite et étiquetée afin de renseigner sur sa criticité, son importance et sa nature.}
+\end{center}
+\end{figure}
+
+            \subsection{Logiciel sur mesure}
+            
+Puisque \gls{biorbdoptim} est en premier lieu un logiciel crée par les membres de l'équipe de commande optimale pour les membres de l'équipe, le cahier des charges n'existe qu'au travers des besoins prochains des étudiants. Il en résulte une couverture de toutes les fonctionnalités générales à l'écriture d'un problème de commande optimale.
+Le pendant de cette approche, est la nécessite récurrente de réécrire une structure précédemment implémentée afin de gagner en clarté et généricité.
+Dans la seconde section consacrée à mes travaux de recherche sur la gestuelle du violoniste, plusieurs exemples de fonctionnalités impliquant un développement sur \gls{biorbdoptim} seront développés.
+
+            \subsection{Article scientifique}
+            
+Le développement de \gls{biorbdoptim} en tant que logiciel de problème de commande optimale fait l'objet de l'écriture d'un article scientifique. Signé par les contributeurs les plus investis, l’objectif de cet article est de présenter les fonctionnalités du logiciel en comparaison à un logiciel similaire : \emph{\gls{moco}}. Je suis investi pour décrire certains exemples d'utilisation. La publication est envisagée d'ici le mois d'octobre 2020 dans le journal \emph{\gls{ieee}}\footnotemark[5].
+
+
+
+
+\footnotetext[5]{https://ieeexplore.ieee.orgà}
+
+
+    \chapter{Développement initial}
+        \section{Structure}
+
+Le code régissant \gls{biorbdoptim} se partitionne en deux entités : la première contient le code fonctionnel du logiciel, dossier \emph{biorbd\_optim}. La seconde recueille une série d'exemple explicitant l'utilisation de toutes les fonctionnalités du logiciel : dossier\emph{exemples} et une série de tests : dossier \emph{tests}
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=\textwidth, keepaspectratio]{images/biorbdoptim_structure.png}
+\caption{Capture d'écran de l'interface web de github, y sont répertoriés les dossiers et fichiers composant le logiciel.}
+\end{center}
+\end{figure}
+Les tests écrits à l'intérieur du dossier tests permettent d'exécuter, idéalement, toutes les lignes de code du dossier biorbd\_optim. Ainsi, après chaque modification ou ajout, le développeur peut s'assurer que son travail ne fausse pas celui de ses collègues. L'écriture de tests, peut paraître fastidieuse initialement, mais se révèle indispensable et permet de mettre en évidence tout dysfonctionnement.
+
+Notons que, nous imposons à toute requête, par l'utilisation du logiciel \emph{gls{travis}}, de fusion d'une branche sur la branche master de pyomeca  l'acquittement de tous les tests, ainsi qu'un respect du formalise contrôlé par le module \emph{gls{black}}.
+
+
+        \section{Mutualisation du code}
+        
+A partir du premier fichier de commande optimale, j'ai procédé au découpage et à la mutualisation de certains parties. En reprenant l’organisation du problème du pendule décrite précédemment (section~\ref{pendule} p.~\pageref{pendule}). On peut dissocier :
+
+\begin{description}
+\setlength\itemsep{-0.2em}
+\item [les degrés de liberté et le nombre de nœuds :] définition de problème par l'utilisateur  --- ici \emph{eocar.py}.
+\item [système dynamique :] écriture de la dynamique --- \emph{dynamics.py}.
+\item [fonctions objectif :] écriture de toutes les fonctions objectifs --- \emph{objective\_functions.py}
+\item [les contraintes :] écriture de toutes les contraintes --- \emph{constraints.py}
+\item [l'appel au solveur :] préparation des données pour le solveur  --- \emph{\_\_init\_\_.py}
+\end{description}
+
+On obtient ainsi la structure suivante :
+ 
+
+\begin{figure}[h]
+\dirtree{%
+.1 \gls{biorbdoptim}.
+.2 biorbd\_optim.
+.3 init.py.
+.3 constraints.py.
+.3 dynamics.py.
+.3 objective\_functions.py.
+.2 examples.
+.3 eocar.
+.4 eocar.bioMod.
+.4 eocar.py.
+}
+\caption{Structure initiale du logiciel \gls{biorbdoptim}}
+\end{figure}
+
+
+
+            \subsection{Définition du problème}
+
+Le problème nommé \emph{Eocar}, utilisé comme premier exemple de \gls{biorbdoptim} consiste à déplacer un segment disposant de 3 translations et d'une rotation, d'un repère à un autre en minimisant les commandes tout au long de la simulation. On dénombre :
+
+
+\begin{description}
+\setlength\itemsep{-0.5em}
+\item[8 états \emph{(X)} :] 4 positions \emph{(Q)} et 4 vitesses \emph{(Qdot)} (3 translations et 1 rotation).
+\item[4 commandes \emph{(U)} :] 4 accélérations \emph{(Tau)} (3 translations et 1 rotation).
+\end{description}
+
+L'implémentation du problème est disponible en annexe (section~\ref{eocar} p.~\pageref{eocar}).
+
+On peut résumer les instructions à :
+\begin{description}
+\setlength\itemsep{-0.2em}
+\item [l'importation des fichiers de biorbd\_optim] --- \emph{lignes 4-7}.
+\item [paramètres du problème] --- \emph{lignes 10-17}.
+\item [sélection d'une fonction objectif :] parmi celles du fichiers \emph{objective\_functions.py} --- \emph{ligne 20}.
+\item [sélection de la dynamique :] parmi celles du fichiers \emph{dynamic.py} --- \emph{lignes 23-24}.
+\item [sélection des contraintes :] parmi celles du fichiers \emph{constraints.py} --- \emph{lignes 27-28}.
+\item [contraintes de bornes en position :] issues du fichier \emph{eocar.bioMod} --- \emph{lignes 34-46}.
+\item [contraintes de bornes en vitesse :] vitesse intermédiaire à $\pm$ 15 m.$s^{-1}$, initiale et finale nulles --- \emph{lignes 48-55}.
+\item [contraintes de bornes en commande :] accélération de $\pm$ 100 m.$s^{-2}$ le long de la simulation --- \emph{lignes 57-62}.
+\item [préparation des données et appel du solveur :] via le fichier \emph{\_\_init.py\_\_.py} --- \emph{lignes 65-70}.
+\item [préparation des données et appel du solveur :] via le fichier \emph{\_\_init.py\_\_.py} --- \emph{lignes 65-70}.
+\item [affichage de la solution :] comme présenté précédemment (Figure~\ref{fig:pendule_graphe} p.~\pageref{fig:pendule_graphe}) --- \emph{lignes 71-79}.
+\end{description}
+
+Il est intéressant de noter qu'avec le solveur \gls{ipopt} il est nécessaire de fournir une solution initiale, nommée \emph{X\_init} et \emph{U\_init} et définie en même temps que les contraintes de bornes. On peut facilement faire le constat que l'on pourrait automatiser l'ajout des bornes de contraintes à partir du fichier \emph{.bioMod}, tout comme l'affichage des résultats. METTRE LIEN QUAND ON LE FAIT !
+
+
+            \subsection{Dynamique}
+
+La classe \emph{Dynamics} est amenée à posséder plusieurs fonctions dynamiques, il y a ici uniquement\emph{forward\_dynamics\_torque\_driven}, dynamique triviale, sans paramètre liant les accélérations \emph{tau} aux vitesses \emph{qdot} et aux positions \emph{q}. On utilise directement son implémentation dans la librairie \gls{biorbd} --- \emph{ligne 11}.
+            
+\begin{center}
+\lstinputlisting[linewidth=18cm, xleftmargin=0cm]{code/biorbd_optim/dynamics.py}
+\vspace{-0.6cm}
+\begin{figure}[h]
+\caption{Fichier \emph{dynamics.py} avec une seule dynamique proposée.}
+\end{figure}
+\end{center}
+    
+            \subsection{Fonctions objectif}
+
+La classe \emph{ObjectiveFunction} est amenée à posséder plusieurs fonctions objectifs, il y a ici uniquement\emph{minimize\_torque}, fonction de Lagrange, c'est-à-dire qui s'applique tout au long de la simulation. Elle consiste à minimiser la somme quadratique, sur chaque nœud, des commandes. Le paramètre \emph{weight} permet lorsque plusieurs fonctions objectifs sont appliquées, de les pondérer.
+
+\begin{center}
+\lstinputlisting[linewidth=18cm, xleftmargin=0cm]{code/biorbd_optim/objective_functions.py}
+\vspace{-0.6cm}
+\begin{figure}[h]
+\caption{Fichier \emph{objective\_function.py} avec une seule fonction objectif proposée.}
+\end{figure}
+\end{center}
+            
+            
+            \subsection{Contraintes}
+            
+La classe \emph{Constraints} est amenée à posséder plusieurs contraintes, il y a ici \emph{\_\_markers\_to\_pair}, contrainte s'assurant que, aux nœuds sélectionnés --- \emph{Instant}, la distance entre deux repères est nulle. Une seconde contrainte est disponible, \emph{continuity\_constraint}, elle assure la continuité de tous les états, entre chaque nœud et ses voisins, comme présenté précédemment (Figure~\ref{dms} p.~\pageref{dms}).
+            
+\begin{center}
+\lstinputlisting[linewidth=18cm, xleftmargin=0cm, firstnumber=14, firstline=14, lastline=22]{code/biorbd_optim/constraints.py}
+\lstinputlisting[linewidth=18cm, xleftmargin=0cm, firstnumber=44, firstline=44, lastline=67]{code/biorbd_optim/constraints.py}
+\vspace{-0.6cm}
+\begin{figure}[h]
+\caption{Extrait du fichier \emph{constraints.py} avec une seule contrainte proposée en complément de la contrainte de continuité.}
+\end{figure}
+\end{center}
+            
+            \subsection{Préparation des données}
+
+Avant de décrire le fichier \emph{\_\_init\_\_.py}, il est nécessaire de savoir ce dont le solveur à besoin. \gls{ipopt} nécessite \emph{a minima} :
+\begin{description}
+\setlength\itemsep{-0.5em}
+\item[Quatre vecteurs associés aux variables] (états et commandes) :
+\begin{itemize}
+\item \emph{V} contenant l'emplacement des variables, organisé comme sur la Figure~\ref{fig:v}.
+\item \emph{V\_bounds.min} contenant les bornes inférieures des éléments de \emph{V}.
+\item \emph{V\_bounds.max} contenant les bornes supérieures des éléments de \emph{V}.
+\item \emph{V\_bounds.init} contenant les valeurs initiales des éléments de \emph{V}.
+\end{itemize}
+\end{description}
+
+
+\begin{description}
+\setlength\itemsep{-0.5em}
+\item[Trois vecteurs associés aux contraintes] :
+\begin{itemize}
+\item \emph{g} listant les expressions des contraintes.
+\item \emph{g\_bounds.min} contenant les bornes inférieures des éléments de \emph{g}.
+\item \emph{g\_bounds.max} contenant les bornes supérieures des éléments de \emph{g}.
+\end{itemize}
+\end{description}
+
+
+\begin{description}
+\item[Un vecteur associés aux fonctions objectifs à une dimension] :
+\begin{itemize}
+\item \emph{J} contenant la somme des fonctions objectifs.
+\end{itemize}
+\end{description}
+
+Si on appelle ns le nombre de nœuds, nx le nombre d'états et nu le nombre de commandes, alors le vecteur V, et les V\_bounds sont de taille $nx \cdot (ns + 1) + nu \cdot ns$. Comme exposé à la Figure~\ref{dms} (p.~\pageref{dms}), la discrétisation du temps implique \emph{ns commandes}, chacune étant constante --- entre deux nœuds, et \emph{ns + 1 états}, ayant tous pour abscisse $t_{i}$ avec $i\in[0, F]$. 
+Il est pertinent de remarquer que les expressions des contraintes du vecteur \emph{g}, valent, lorsque la contrainte est vérifiée : zéro. Ainsi les vecteurs \emph{g\_bounds.min} et \emph{g\_bounds.max} ne contiennent que des 0. Cette convention a été prise par souci de simplicité initialement, néanmoins 
+
+\newpage
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=6cm, keepaspectratio]{images/v.png}
+\caption{Organisation du vecteur V. Avec nx le nombre d'états, nu le nombre de commandes, et ns le nombre de nœuds}
+\label{fig:v}
+\end{center}
+\end{figure}
+
+
+
+Le fichier \emph{\_\_init\_\_.py}, (disponible en annexe~\ref{init} p.~\pageref{init}) organise toutes les données du problème en prévision de l'appel au solveur \gls{ipopt}. Le décrire linéairement ne présente que peu d'intérêt, il est davantage pertinent de relever ses fonctionnalités :
+\begin{description}
+\item[Vérification des bornes :] --- \emph{lignes 79-82} par les classes \emph{PathCondition} et \emph{Bounds}, elles s'assurent que les bornes sont définies pour toutes les variables à tous les nœuds, et les complètes au besoin --- \emph{lignes 191-249}.
+
+\item[Dimension et organisation de V :] afin de faciliter la création de V et ses dérivés, j'ai utilisé deux vecteurs : X et U, organisant respectivement des états et les commandes.
+La classe \emph{variable} permet de dimensionner correctement les deux vecteurs, et de créer les variables \gls{casadi} qui leurs sont associés --- \emph{lignes 20-36}. La fonction \emph{\_\_define\_multiple\_shooting\_nodes} construit le vecteur V et ses dérives à partir des vecteurs X et U.  \emph{lignes 131-163}. 
+
+
+\item[Création des vecteurs J, g et ses dérivés :] opérée lors de l'appel des fonctions incluses dans les fichiers \emph{biorbd\_optim}, \emph{constraints.py} et \emph{dynamics.py} --- \emph{lignes 94-105}. Notons l'appel de la fonction \emph{\_\_prepare\_dynamics}, qui construit le système dynamique avec \gls{casadi}.
+
+\item[Appel du solveur :] les vecteurs J, g ,V et leurs dérivés sont transmis au solveur \gls{ipopt} avec quelques directives --- \emph{lignes 165-188}.
+\end{description}
+
+            \subsection{Partage du logiciel}
+            
+Cette version initiale de \gls{biorbdoptim}, utilisable par tout étudiant du laboratoire --- ou chercheur à travers le monde a fait l'objet de deux présentations menées par Paul \textsc{Wegiel} et moi. La première (Figure~\ref{s2m1} p.~\pageref{s2m1}) était à l'attention des membres du groupe commande optimale, la seconde (Figure~\ref{s2m2} p.~\pageref{s2m2}) était à l'attention de tous membres du laboratoire.
+
+
+
+    \chapter{Ajout de fonctionnalités}
+    
+Depuis l'écriture de cette base, \gls{biorbdoptim} n'a cessé de se perfectionner selon plusieurs critères~:
+\begin{description}
+\setlength\itemsep{-0.5em}
+\item[Fonctionnalités :] capacité à décrire des problèmes complexes, minimisation du code nécessaire pour définir un problème, premières approches d'analyse des résultats per et post optimisation du solveur.
+\item[Couverture des exemples :] ajout d'une panoplie d'exemples --- plus de 60, illustrant l'utilisation de toutes les fonctionnalités.
+\item[Stabilité :] chaque exemple induisant \emph{a minima} un test, \gls{biorbdoptim} dispose de plus de 70 tests, couvrant 87\% de toutes les lignes de codes.
+\end{description}
+
+Le dossier \emph{biorbd\_optim} contient à lui seul, près de trois mille lignes de codes réparties sur vingt  quatre fichiers. Il convient que décrire tous les mécanismes et logiques inclus dans \gls{biorbdoptim} n'est pas le propos de ce rapport, et nécessiterait assurément plusieurs fois le nombre de page de celui-ci. Je choisis ainsi de ne présenter que certaines des fonctionnalités que j'ai implémenté, en lien avec le sujet du geste violonistique. Les contraintes, objectifs, dynamiques et modèles implémentés uniquement pour le geste violonistique seront développés dans la partie~\ref{violon} (p.~\pageref{violon}).
+
+La Figure~\ref{fig:repartition} (p.~\pageref{fig:repartition}), affiche entre autres, le nombre de \emph{commits} publiés au global, et individuellement. Il est pertinent de noter que malgré des fluctuations individuelles, le projet progresse à un rythme stable. Mes fluctuations sont assimilables à une alternance entre des phases de développement de \gls{biorbdoptim} et du geste violonistique.
+\newpage
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=0.9\textwidth, keepaspectratio]{images/biorbdoptim_participation.png}
+\caption{Répartition de l'écriture du code de \gls{biorbdoptim} parmi les quatre contributeurs les plus importants à date du 16/07/2020.}
+\small Benjamin \textsc{Michaud}(pariterre), Théophile \textsc{Gousselot}(tgouss), Paul \textsc{Wegiel} (paulWegiel). En vert++ et rouge-- le nombre de lignes respectivement ajoutées et supprimées.
+\label{fig:repartition}
+\end{center}
+\end{figure}
+
+
+        \section{Muscles}
+
+Les variables, c'est-à-dire les états et les commandes sont identiques, des positions et des vitesses en états et des accélérations en commandes. Notons que tous ces degrés de liberté correspondent, en biomécanique, à des articulations, modélisés par des rotations. La notion de muscle, étant au cœur de mon projet violonistique, mais également d'autres projets du laboratoire, il était nécessaire de rendre l'implémentation des muscles fonctionnelle.
+
+
+            \subsection{Anatomie}
+
+Les muscles sont des tissus assurant le mouvement du corps grâce une propriété essentielle, la contractilité. En effet, à la suite d'un message envoyé par le cerveau, ils ont la capacité de se contracter par eux-mêmes et ainsi entraîner les os sur lesquels ils sont attachés.
+Pour cela, les muscles ont une organisation bien précise. On distingue d’abord les tendons
+des fibres musculaires. Le tendon est la partie qui relie les fibres musculaires aux os. Il n’a aucune capacité contractile, mais il possède des propriétés élastiques du fait du collagène qui le compose pour transmettre le mouvement du muscle vers l’os. Les fibres musculaires, elles, sont constituées de myofibrilles c’est-à-dire des tubes divisés en sarcomères qui sont le siège de la contraction grâce aux filaments d’actine et de myosine. 
+
+La force créée par cette contraction dépend des caractéristiques intrinsèques du muscle. En
+effet, pour une même intensité de contraction, tous les muscles ne génèrent pas la même force. Elle dépend de :
+\begin{itemize}
+\setlength\itemsep{-0.5em}
+ \item la longueur du muscle.
+ \item le nombre de sarcomère par myofibrille.
+ \item le nombre de myofibrille par fibre.
+ \item le nombre de fibre par muscle.
+ \item l'angle de pennation --- angle des fibres par rapport au muscle
+\end{itemize}
+
+            \subsection{Modélisation}
+
+La librairie \gls{biorbd} intègre une modélisation des muscles, comprenant les caractéristiques évoqués précédemment. Nous modélisons la contraction des muscles par un coefficient d'activation --- compris entre 0 et 1. En fonction de ses caractéristiques, et de son activation \gls{biorbd} peut calculer les forces appliqués sur les segments.
+
+Il suffit d'assimiler l'activation des muscles comme une commande agissant sur les états ---- positions et vitesses des articulations. Il est alors nécessaire de réécrire une dynamique considérant les activations musculaires comme de nouvelles commandes.
+
+\begin{center}
+\setlength\itemsep{-0.5em}
+\lstinputlisting[linewidth=18cm, xleftmargin=0cm]{code/dynamic_muscles.py}
+\vspace{-0.6cm}
+\begin{figure}[h]
+\caption{Extrait du fichier \emph{dynamics.py} incluant l'activation musculaire comme commande.}
+\end{figure}
+\end{center}
+
+
+Notons que pour d'autres projets de recherche, des étudiants ont souhaité dissocier la commande du cerveau de l'activation du muscle. J'ai ainsi implémenté une commande d'excitation --- modélisation du message nerveux, et un état activation du muscle.
+
+        \section{Multi-phases}
+        
+La notion du multi-phase consiste à mettre bout à bout des problèmes de commande optimale ayant des influences les uns sur les autres. Il peut s'agir d'un même problème issue d'un unique modèle .bioMod avec des objectifs différents, comme de problèmes radicalement différents. On appel ainsi une \emph{phase}, un des problèmes.
+
+Dans le projet du geste violonistique, je modélise un tiré-poussé de l'archet, c'est-à-dire un aller retour, comme étant une phase. Dans l'optique d'une modélisation de jeu longue, la simulation sera une succession de phases, chaque phase étant un tiré-poussé de l'archet.
+
+En principe, il suffit de remplacer toutes les entrées de l'utilisateur (Annexe~\ref{eocar}, (p.~\pageref{eocar}) par des listes de longueur égales au nombre de phase. Néanmoins, cela a imposé une réorganisation complète du fichier \emph{\_\_init.py\_\_}, puisque qu'il devient nécessaire de préparer chaque phase, puis de concaténer correctement toutes les phases pour remplir correctement les vecteurs J, V, g et leurs dérivés. Toutes les phases sont regroupées dans une liste (nommée \emph{nlp --- non linear problem}), qui est l'attribut d'une classe : \emph{OptimalControlProgram} --- ses objets son majoritairement appelés \emph{ocp}.
+
+Afin de s'assurer de la validité des arguments fournies par l'utilisateur, des tests de types lors de l'ajout d'un paramètre à une phase ont été implémentés (Figure~\ref{fig:test_type}, p.~\pageref{fig:test_type}). En effet, la structure de déclaration des paramètres se complexifie à cause du multi-phases (Figure~\ref{fig:eocar_phases}, p.~\pageref{fig:eocar_phases}).
+
+
+\begin{center}
+\setlength\itemsep{-0.5em}
+\lstinputlisting[linewidth=18cm, xleftmargin=0cm]{code/multi_init.py}
+\vspace{-0.6cm}
+\begin{figure}[h]
+\caption{Extrait de la fonction \emph{\_\_add\_to\_nlp} du fichier \emph{\_\_init.py\_\_.py}. La fonction vérifie que le paramètre donné est en adéquation avec le nombre de phase, dans le cas échéant, elle ajoute à chaque phase --- élément de nlp le paramètre.}
+\label{fig:test_type}
+\end{figure}
+\end{center}
+
+\newpage
+\begin{center}
+\setlength\itemsep{-0.5em}
+\lstinputlisting[linewidth=18cm, xleftmargin=0cm, firstnumber=17, firstline=17, lastline=52]{code_no_black/multi_eocar.py}
+\vspace{-0.6cm}
+\begin{figure}[h]
+\caption{Extrait du fichier \emph{eocar.py} version à \emph{deux phases}. Tous les paramètres sont déclarés au sein de listes de deux éléments, un par phase.}
+\label{fig:eocar_phases}
+A l'image de la variable \emph{constraints}, la déclaration est complexe : ici deux contraintes sur la première phase, une seule sur la deuxième phase. L'intérêt des tests (Figure~\ref{fig:test_type}, p.~\pageref{fig:test_type}) permet de mettre en évidence une mauvaise déclaration.
+\end{figure}
+\end{center}
+
+        \section{Exploitation des résultats}
+Le logiciel \gls{biorbdoptim} peut à ce stade décrire une large gamme de problème de commande optimale. Il retourne à l'utilisateur ce que le solveur \gls{ipopt} retourne, c'est-à-dire, en première approximation, le vecteur V complété --- comprenant tous les états et commandes.
+Si l'objectif n'est clairement pas de proposer une solution d'analyse des résultats, il s'est avéré nécessaire de proposer à tous les utilisateurs une solution simple d'affichage des résultats.
+        
+            \subsection{Réorganisation des variables}
+
+La première tâche à accomplir, est de réorganiser le vecteur V (Figure~\ref{fig:v}, p.~\pageref{fig:v}). J'ai crée une classe \emph{Data}, structurant les variables de la sorte --- après appel à une la fonction \emph{Data.get\_data} :
+
+\begin{figure}[h]
+\dirtree{%
+.1 variables.
+.2 états.
+.3 état 1 (objet de Data).
+.4 phase 1.
+.5 nœud 1.
+.6 degré 1 -> \textbf{valeur}.
+.6 degré 2 -> \textbf{valeur}.
+.6 degré 3 -> \textbf{valeur}.
+.6 degré ....
+.5 nœud 2.
+.5 nœud ....
+.4 phase 2.
+.4 phase ....
+.3 état 2 (objet de Data).
+.3 état ....
+.2 commandes.
+.3 commande 1 (objet de Data).
+.4 phase 1.
+.5 nœud 1.
+.6 degré 1 -> \textbf{valeur}.
+.6 degré ....
+.5 nœud ....
+.4 phase ....
+.3 commande ....
+}
+\caption{Structure retournée par l'appel à la fonction \emph{Data.get\_data} du fichier \emph{data.py}}
+\label{fig:data}
+\end{figure}
+
+
+            
+            \subsection{Affichage graphique}
+                
+Le module \gls{matplotlib} a été utilisé pour créer et remplir les fenêtres d'affichages. J'ai crée une fenêtre par variable, c'est-à-dire, par état et commande (Figure~\ref{fig:data}, p.~\pageref{fig:data}). Sur chaque fenêtre il y a un graphique par degré, affichant l'évolution en fonction des nœuds. Si le problème le permet on délimite les phases.
+
+Notons, que les commandes étant considérées constantes entre deux nœuds, on trace une fonction à escalier (Figure~\ref{fig:commande_plot}, p.~\pageref{fig:commande_plot}).
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.85\textwidth, keepaspectratio]{images/plot_inte_commande.png}
+\caption{Affichage d'une commande. La commande est une fonction d'escalier.}
+\label{fig:commande_plot}
+\end{center}
+\end{figure}
+
+Concernant les états, on trace autant de courbes qu'il n'y a d'intervalles entre deux nœuds. Ces courbes sont obtenus à partir de la valeur retournée par \gls{ipopt}, intégrée un certain nombre de fois. Ce type d'affichage permet de mettre en évidence des discontinuités, c'est-à-dire des non-respect de la contrainte de continuité (Figure~\ref{fig:etat_plot}, p.~\pageref{fig:etat_plot}).
+
+%todo combien de fois ?
 
 \begin{figure}[h]
 \begin{center}
-\includegraphics[width=16cm, keepaspectratio]{images/pendule13.png}
-\caption{Mouvement sous biorbd-viz du modèle pendule.bioMod.}
+\includegraphics[width=0.85\textwidth, keepaspectratio]{images/plot_inte_etat.png}
+\caption{Affichage d'une vitesse. Elle présente clairement des discontinuités à certains nœuds.}
+\label{fig:etat_plot}
 \end{center}
 \end{figure}
-blablabla
-\newpage
-
-        \section{cahier des charges} %évolutif
 
 
-        \section{Développement collaboratif}
-github + gitkraken + trello
-choix de python
-        \section{Logiciel sur mesure}
-lien <-> Violon
-        \section{Article scientifique}
-    \chapter{Développement}
-        \section{Transfert de langage}
-        \section{Besoin/Réalisation1}
-Mettre en avant les choix réalisés
-        \section{Besoin/Réalisation2}
-%mettre custom problem_type-> lien avec section VIOlon
-        \section{Besoin/Réalisation2}
-single shooting, comparar test manuellement sur meld-> écrire le test, il faudra l'écrire dans tous les cas
-        \section{Exploitation des résultats}
-            \subsection{Affichage graphique des états et controles}
-                \subsubsection{Matplotlib}
-                \gls{mhe}
-                \subsubsection{Intégration}
-            \subsection{Visualisation sur Biorbd-viz}
-            \subsection{Sauvegarde}
-                \subsubsection{Contexte}
-                \subsubsection{Résultat}
-                \subsubsection{}
+Notons que l'on obtient un affichage semblable à celui exposé par Ren Z. Skjetne R. Gao Z. \cite{dms} dans la Figure~\ref{fig:dms} (p.~\pageref{fig:dms}).
+
+\label{live}
+Le solveur \gls{ipopt} permet de retourner le vecteur V après chaque itération. Nous avons souhaité afficher les variables en ``temps réel'', cette option a été nommée \emph{show\_online\_optim} (voir Figure~\ref{fig:solve}, p.~\pageref{fig:solve}). A chaque itération, on procède à la mise à jour des graphiques en fonction des solution retournée par \gls{ipopt}. En annexe est disponible une capture d'écran affichant la disposition des graphiques, et un aperçu des informations relatives aux itérations renvoyées par le solveur \gls{ipopt} (Figure~\ref{fig:show_online_violon}, p.~\pageref{fig:show_online_violon}).
+
+La réalisation de tous les affichages avec :
+\begin{itemize}
+\setlength\parskip{-0.5em}
+\item mise à jour à chaque itération.
+\item intégration des états.
+\item calcul de la répartition des graphiques au sein des fenêtres, et des fenêtres au sein de l'écran.
+\end{itemize}
+représente une importante quantité de travail, et la réécriture de plusieurs structures internes à \gls{biorbdoptim}. Néanmoins, l'affichage graphique des résultats, est disponible avec n'importe quel problème de commande optimal, indépendamment du nombre et du type d'états et de commandes. 
+
+            \subsection{Visualisation sur BiorbdViz}
         
-        \section{Exemples}
-        \section{Tests}
+L'interface de programmation \gls{biorbdviz} présentée précédemment (Section~\ref{fig:show_online_violon}, p.~\pageref{fig:show_online_violon}), a été intégrée à \gls{biorbdoptim}. Il m'a suffit d'extraire les positions de la structure réorganisée du vecteur V (voir Figure~\ref{fig:data}, p.~\pageref{fig:data}), et d'appeler le module \gls{biorbdviz}.
+
+Le nombre d'images constituant l'animation du mouvement étant égal au nombre de nœuds, la vidéo pouvait être trop rapide ou lente. J'ai alors utilisé la librairie \gls{scipy} au sein de la fonction \emph{Data.get\_data} afin de retourner la structure (voir Figure~\ref{fig:data}, p.~\pageref{fig:data}) avec un nombre de nœuds modifié par interpolation.
+
+Le résultat est similaire à ce qu'affiché précédemment (voir Figure~\ref{fig:pendule_graphe}, p.~\pageref{fig:pendule_graphe}), si ce n'est que le nombre d'images --- en bas à droite, peut différer du nombre de nœuds par interpolation.
+
+
+\begin{center}
+\setlength\itemsep{-0.5em}
+\lstinputlisting[firstnumber=92]{code/getdata.py}
+\vspace{-0.6cm}
+\begin{figure}[h]
+\caption{Extrait de la fonction \emph{Data.get\_data} du fichier \emph{data.py}.}
+La variable \emph{sol\_x} contient le vecteur V retourné par \gls{ipopt}. On peut spécifier si la liste retournée contient les commandes,  les états, si oui intégrés, interpolés ou brutes. On peut également choisir de concaténer toutes les phases.
+\label{fig:getdata}
+\end{figure}
+\end{center}
+
+Ces outils d'affichage des résultats ont incité la créations d'une classe \emph{ShowResult}, construisant un object à partir d'un objet ocp de la classe OptimalControlProgram et du vecteur V retourné par \gls{ipopt}. Les object de \emph{ShowResult} peuvent en une ligne appeler les fonctions \emph{graphs} et \emph{animate} qui appellent respectivement l'affichage des graphs et l'animation sur \gls{biorbdviz}.   
+
+        \section{Sauvegarde du problème et des résultats}
+        
+L'exécution d'un solveur peut nécessiter un temps conséquent --- plusieurs heures pour des problèmes lourds comme le geste violonistique. Il est ainsi nécessaire de pouvoir sauvegarder les résultats de la commande optimale après exécution du solveur.
+
+J'ai utilisé la librairie \gls{pickle} afin d'écrire les fonctions de lecture/écriture de fichiers. Le choix de \gls{pickle} s'est imposé de part sa capacité à sauvegarder dans un fichier des structures complexes. J'ai nommé avec Benjamin \textsc{Michaud} l'extension de ce fichier de sauvegarde ``\emph{.bo}'' en référence à \gls{biorbdoptim}. En plus de contenir le vecteur V renvoyé par le solveur, j'ai intégré une copie des arguments fournies à la classe OptimalControlProgram lors de la création de l'objet \emph{ocp}. Cela permet de mémoriser le contexte dans lequel la solution a été obtenue, et de relancer une simulation dans un contexte identique ou proche. La copie de ocp permet également de créer un objet de la classe \emph{ShowResult} afin d'afficher les graphiques et l'animation \gls{biorbdviz}.
+
+J'ai crée une fonction \emph{read\_information} affichant le détail du contexte de l'objet ocp. Cela permet lorsque l'on possède bon nombre de fichier ``.bo'', comme ce fut mon cas avec le violon, d'identifier rapidement les particularité du contexte.
+
+\begin{center}
+\setlength\itemsep{-0.5em}
+\lstinputlisting[xleftmargin=0.05\textwidth, linewidth=0.95\textwidth, firstnumber=93]{code/savebo.py}
+\vspace{-0.6cm}
+\begin{figure}[h]
+\caption{Enregistrement d'un fichier ``.bo'' issue de l'exemple \emph{pendulum.py}.}
+La variable \emph{sol} contient le vecteur V retourné par \gls{ipopt}. On peut à partir de la sauvegarde afficher la solution.
+\label{fig:savebo}
+\end{figure}
+\end{center}
+
+Dans le cas d'un modèle .bioMod avec des traits --- \emph{mesh} trop nombreux, comme c'est le cas pour le modèle du violon, l'utilisation de \gls{casadi} pour ouvrir le modèle sur \gls{biorbdviz} nécessite plus de 8Go de RAM. Il devient impossible de visualiser l'animation avec \gls{casadi}, \gls{eigen}, par construction, nécessite très peu de RAM, indépendamment du nombre de traits. Le problème est que la classe OptimalControlProgram nécessite \gls{casadi}, et que l'on ne peut utiliser parallèlement \gls{casadi} et \gls{eigen}. J'ai ainsi été contraint à créer un nouveau type de fichier de sauvegarde, contenant uniquement le résultat de la fonction \emph{Data.get\_data}. Le format étant spécialement utilisé pour la visualisation sur \gls{biorbdviz}, j'ai nommé l'extension avec Benjamin \textsc{Michaud} ``\emph{.bob}'' --- \gls{biorbdoptim} - \gls{biorbdviz}.
+
+Enfin, j'ai souhaité obtenir toutes les valeurs des vecteurs V affichés en direct (Section~\ref{live}, p.~\pageref{live}), afin de pouvoir analyser l'évolution de certains états musculaires au fil des itérations. J'ai implémenté une option, pour obtenir toutes les variables de toutes les itérations, nommée \emph{return\_iterations} (Figure~\ref{fig:solve}, p.~\pageref{fig:solve}). 
+
+Il a été nécessaire d’enregistrer, à chaque itération, dans un fichier les valeurs du vecteur V. Ce fichier est supprimé une fois que l'exécution du solveur est achevée, son contenu est retourné par la fonction \emph{solve}. Le fichier de sauvegarde temporaire doit être supprimé automatiquement, si un utilisateur le voit, c'est qu'il y a eu un dysfonctionnement. C'est pourquoi j'ai nommé son extension ``\emph{.bobo}'', dans la ligné des extensions précédentes --- \emph{.bo} et \emph{.bob}.
+
+\begin{center}
+\setlength\itemsep{-0.5em}
+\lstinputlisting[xleftmargin=0.05\textwidth, linewidth=0.95\textwidth, firstnumber=93]{code/solve.py}
+\vspace{-0.6cm}
+\begin{figure}[h]
+\caption{Appel à la fonction \emph{solve} qui lance l'exécution du solveur. Les options \emph{show\_on\_optim} et \emph{returns\_iterations} permettent respectivement d'afficher les graphiques avec \gls{matplotlib} mis à jour à chaque itérations et de retourner toutes les valeurs du vecteur V pour toutes les itérations. ces valeurs sont transmises à \emph{sol\_iterations} tandis que \emph{sol} contient en première approximation le vecteur V final.}
+\label{fig:solve}
+\end{figure}
+\end{center}
+
+        
+
+        \section{Simulation}
+        
+single shooting, comparar test manuellement sur meld-> écrire le test, il faudra l'écrire dans tous les cas
+                
+        
+%gros pb long comme violon -> simulation rapide !
+    \chapter{Enseignements}
 %refactoring
 %nécessité de simplicité, environnemnt miniconda à recreer (mieux vaut repartir d'une base saine) -> luciditer
     
+
+%debug ariane dang ariane dang
+
+% cammbert répartition de mon temps
+%graph qui retrace tous les ajouts
